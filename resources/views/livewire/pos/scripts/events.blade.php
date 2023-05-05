@@ -20,10 +20,6 @@
             noty(Msg)
         })
 
-        window.livewire.on('print-ticket', saleId => {
-            window.open("print://" + saleId, '_blank');
-        })
-
         window.livewire.on('sale-ok', Msg => {
             noty(Msg)
         })

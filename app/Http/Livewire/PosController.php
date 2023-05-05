@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Clientes;
 use Livewire\Component;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use App\Models\Denomination;
@@ -10,6 +11,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\Sale;
 use App\Models\User;
 use App\Models\SaleDetails;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
@@ -180,7 +182,7 @@ class PosController extends Component
 
     public function saveSale()
     {
-        if ($this->total <=0) {
+        if ($this->total <= 0) {
             $this->emit('sale-error', 'AGREGAR PRODUCTOS A LA VENTA');
             return;
         }
@@ -197,13 +199,13 @@ class PosController extends Component
 
         try {
 
-             $sale = Sale::create([
+            $sale = Sale::create([
                 'total' => $this->total,
                 'items' => $this->itemsQuantity,
                 'cash' => $this->efectivo,
                 'change' => $this->change,
                 'user_id' => Auth()->user()->id
-            ]); 
+            ]);
 
             if ($sale) {
                 $items = Cart::getContent();
@@ -225,23 +227,51 @@ class PosController extends Component
             DB::commit();
 
             Cart::clear();
-            $this->efectivo =0;
-            $this->change =0;
+            $this->efectivo = 0;
+            $this->change = 0;
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
             $this->emit('sale-ok', 'VENTA REGISTRADA CON EXITO, REVISA TU TICKET DE VENTA');
             $this->emit('print-ticket', $sale->id);
-
         } catch (Exception $e) {
             DB::rollback();
             $this->emit('sale-error', $e->getMessage());
         }
+
+        return redirect()->route('ticket');
     }
 
-    public function printTicket($sale)
+    public function printTicket($userId, $reportType, $dateFrom = null, $dateTo = null)
     {
-       return Redirect::to("print//$sale->id");
-    }
 
-   
+        $data = [];
+
+        if ($reportType == 0) //Ventas del dia
+        {
+            $from = Carbon::parse(Carbon::now())->format('Y-m-d') . ' 00:00:00';
+            $to = Carbon::parse(Carbon::now())->format('Y-m-d') . ' 23:59:59';
+        } else {
+            $from = Carbon::parse($dateFrom)->format('Y-m-d') . ' 00:00:00';
+            $to = Carbon::parse($dateTo)->format('Y-m-d') . ' 23:59:59';
+        }
+
+        if ($userId == 0) {
+            $data = Sale::join('users as u', 'u.id', 'sales.user_id')
+                ->select('sales.*', 'u.name as user')
+                ->whereBetween('sales.created_at', [$from, $to])
+                ->get();
+        } else {
+            $data = Sale::join('users as u', 'u.id', 'sales.user_id')
+                ->select('sales.*', 'u.name as user')
+                ->whereBetween('sales.created_at', [$from, $to])
+                ->where('user_id', $userId)
+                ->get();
+        }
+
+        $user = $userId == 0 ? 'Todos' : User::find($userId)->name;
+
+        $pdf = PDF::Loadview('pdf.ventas_unique', compact('data', 'reportType', 'user', 'dateFrom', 'dateTo'));
+
+        return $pdf->download('factura.pdf');
+    }
 }

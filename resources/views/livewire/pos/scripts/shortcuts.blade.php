@@ -20,7 +20,7 @@
         {
             noty('Upsss PARECE QUE NO TIENES PRDOUCTOS AGREGADOS AL CARRITO AGREGA ALGO :3')
         }
-    })
+    });
 
 
 </script>

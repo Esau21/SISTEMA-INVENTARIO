@@ -4,7 +4,7 @@
             <li class="nav-item theme-logo">
                 <a class="text-primary" href="home">
                     <img src="/img/logo.svg" class="navbar-logo" width="70px;" height="70px;" alt="logo">
-                    <b  style="font-size: 15px; color:#3B3f">SGIV LITE</b>
+                    <b  style="font-size: 15px; color:#3B3f">MOVIL DE S.A DE C.V</b>
                 </a>
             </li>
         </ul>
