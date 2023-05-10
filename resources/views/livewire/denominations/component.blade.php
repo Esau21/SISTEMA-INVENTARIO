@@ -71,6 +71,9 @@
         window.livewire.on('item-updated', msg =>{
             $('#theModal').modal('hide')
         });
+        window.livewire.on('item-delete', Msg =>{
+            noty(Msg);
+        });
         window.livewire.on('modal-hide', msg =>{
             $('#theModal').modal('hide')
         });

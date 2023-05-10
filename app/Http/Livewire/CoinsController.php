@@ -163,7 +163,7 @@ class CoinsController extends Component
         }
 
         $this->resetUI();
-        $this->emit('item-deleted', 'Denominacion Eliminada');
+        $this->emit('item-delete', 'Moneda Eliminada');
     }
 
 }

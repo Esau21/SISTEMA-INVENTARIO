@@ -24,7 +24,7 @@
         <div class="base-icons">
             <i class="fas fa-home fa-3x"></i>
         </div>
-        <span class="text-success">INICIO</span>
+        <span class="text-white">INICIO</span>
     </div>
     </a>
 </li> --}}
@@ -36,7 +36,7 @@
                         <div class="base-icons">
                             <i class="fab fa-cuttlefish fa-3x"></i>
                         </div>
-                        <span class="text-success">CATEGORIAS</span>
+                        <span class="text-white">CATEGORIAS</span>
                     </div>
                 </a>
             </li>
@@ -50,7 +50,7 @@
                         <div class="base-icons">
                             <i class="fab fa-product-hunt fa-3x"></i>
                         </div>
-                        <span class="text-success">PRODUCTOS</span>
+                        <span class="text-white">PRODUCTOS</span>
                     </div>
                 </a>
             </li>
@@ -62,7 +62,7 @@
                         <div class="base-icons">
                             <i class="fas fa-cart-plus fa-3x"></i>
                         </div>
-                        <span class="text-success">VENTAS</span>
+                        <span class="text-white">VENTAS</span>
                     </div>
                 </a>
             </li>
@@ -74,7 +74,7 @@
                         <div class="base-icons">
                             <i class="fas fa-key fa-3x"></i>
                         </div>
-                        <span class="text-success">ROLES</span>
+                        <span class="text-white">ROLES</span>
                     </div>
                 </a>
             </li>
@@ -86,7 +86,7 @@
                         <div class="base-icons">
                             <i class="fas fa-check-square fa-3x"></i>
                         </div>
-                        <span class="text-success">PERMISOS</span>
+                        <span class="text-white">PERMISOS</span>
                     </div>
                 </a>
             </li>
@@ -98,7 +98,7 @@
                         <div class="base-icons">
                             <i class="fas fa-eye fa-3x"></i>
                         </div>
-                        <span class="text-success">ASIGNAR</span>
+                        <span class="text-white">ASIGNAR</span>
                     </div>
                 </a>
             </li>
@@ -110,7 +110,7 @@
                         <div class="base-icons">
                             <i class="fas fa-users fa-3x"></i>
                         </div>
-                        <span class="text-success">USUARIOS</span>
+                        <span class="text-white">USUARIOS</span>
                     </div>
                 </a>
             </li>
@@ -122,7 +122,7 @@
                         <div class="base-icons">
                             <i class="fas fa-user fa-3x"></i>
                         </div>
-                        <span class="text-success">CLIENTES</span>
+                        <span class="text-white">CLIENTES</span>
                     </div>
                 </a>
             </li>
@@ -134,7 +134,7 @@
                         <div class="base-icons">
                             <i class="fas fa-coins fa-3x"></i>
                         </div>
-                        <span class="text-success">MONEDAS</span>
+                        <span class="text-white">MONEDAS</span>
                     </div>
                 </a>
             </li>
@@ -146,7 +146,7 @@
                         <div class="base-icons">
                             <i class="fas fa-dollar-sign fa-3x"></i>
                         </div>
-                        <span class="text-success">ARQUEO</span>
+                        <span class="text-white">ARQUEO</span>
                     </div>
                 </a>
             </li>
@@ -157,7 +157,7 @@
                         <div class="base-icons">
                             <i class="fas fa-chart-line fa-3x"></i>
                         </div>
-                        <span class="text-success">REPORTES</span>
+                        <span class="text-white">REPORTES</span>
                     </div>
                 </a>
             </li>
@@ -168,7 +168,7 @@
                         <div class="base-icons">
                             <i class="fas fa-file-invoice-dollar fa-3x"></i>
                         </div>
-                        <span class="text-success">FACTURACIÓN</span>
+                        <span class="text-white">FACTURACIÓN</span>
                     </div>
                 </a>
             </li>

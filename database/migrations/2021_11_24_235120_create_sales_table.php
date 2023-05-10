@@ -17,6 +17,7 @@ class CreateSalesTable extends Migration
             $table->id();
             $table->decimal('total', 10, 2);
             $table->integer('items');
+            $table->float('iva');
             $table->decimal('cash', 10, 2);
             $table->decimal('change', 10, 2);
             $table->enum('status', ['PAID', 'PENDING', 'CANCELLED'])->default('PAID');

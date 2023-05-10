@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\DB;
 
 class PosController extends Component
 {
-    public $total, $itemsQuantity, $efectivo, $change;
+    public $total, $itemsQuantity, $efectivo, $change, $iva, $totalConIva;
 
 
     public function mount()
@@ -46,11 +46,23 @@ class PosController extends Component
         $this->change = ($this->efectivo - $this->total);
     }
 
+    public function Iva($value)
+    {
+        $iva = 0.13;
+
+        $precioProducto = ($value == 0 ? $this->total : $value);
+        $montoIva = $precioProducto * $iva;
+        $this->totalConIva = $precioProducto + $montoIva;
+        $this->efectivo += $precioProducto + $montoIva;
+    }
+
+
     protected $listeners = [
         'scan-code' => 'ScanCode',
         'removeItem' => 'removeItem',
         'clearCart' => 'clearCart',
-        'saveSale' => 'saveSale'
+        'saveSale' => 'saveSale',
+        'reload-page' => '$refresh',
     ];
 
     public function ScanCode($barcode, $cant = 1)
@@ -199,11 +211,16 @@ class PosController extends Component
 
         try {
 
+            $iva = 0.13;
+            $totalConIva = $this->total * (1 + $iva);
+            $montoIva = $totalConIva - $this->total;
+
             $sale = Sale::create([
                 'total' => $this->total,
                 'items' => $this->itemsQuantity,
                 'cash' => $this->efectivo,
                 'change' => $this->change,
+                'iva' => $montoIva,
                 'user_id' => Auth()->user()->id
             ]);
 
@@ -233,6 +250,8 @@ class PosController extends Component
             $this->itemsQuantity = Cart::getTotalQuantity();
             $this->emit('sale-ok', 'VENTA REGISTRADA CON EXITO, REVISA TU TICKET DE VENTA');
             $this->emit('print-ticket', $sale->id);
+            $this->emit('reload-page');
+
         } catch (Exception $e) {
             DB::rollback();
             $this->emit('sale-error', $e->getMessage());
@@ -240,6 +259,8 @@ class PosController extends Component
 
         return redirect()->route('ticket');
     }
+
+
 
     public function printTicket($userId, $reportType, $dateFrom = null, $dateTo = null)
     {
