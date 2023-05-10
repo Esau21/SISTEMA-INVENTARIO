@@ -10,7 +10,7 @@
                         <thead class="text-white" style="background: #3B3F5C">
                             <tr>
                                 <th width="10%"></th>
-                                <th class="table-th text-left text-white">DESCRIPCION</th>
+                                <th class="table-th text-left text-white">DESCRIPCIÓN</th>
                                 <th class="table-th text-center text-white">PRECIO</th>
                                 <th width="13%" class="table-th text-center text-white">CANT</th>
                                 <th class="table-th text-center text-white">IMPORTE</th>
