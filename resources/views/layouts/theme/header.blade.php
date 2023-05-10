@@ -4,7 +4,7 @@
             <li class="nav-item theme-logo">
                 <a class="text-primary" href="home">
                     <img src="{{ asset('img/edmae.png') }}" class="navbar-logo" width="300px;" height="300px;" alt="logo">
-                    <b  style="font-size: 15px; color:#ffffff">MOVIL DE S.A DE C.V</b>
+                    <b  style="font-size: 15px; color:#ffffff">M.A.E DE S.A DE C.V</b>
                 </a>
             </li>
         </ul>
