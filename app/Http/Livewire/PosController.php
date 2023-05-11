@@ -41,11 +41,11 @@ class PosController extends Component
             ->section('content');
     }
 
-    public function ACash($value)
+    /* public function ACash($value)
     {
         $this->efectivo += ($value == 0 ? $this->total : $value);
         $this->change = ($this->efectivo - $this->total);
-    }
+    } */
 
     public function Iva($value)
     {
@@ -274,6 +274,6 @@ class PosController extends Component
         $TotalconIva = $sale->total + $ivaCalcular; 
 
         $pdf = PDF::loadView('pdf.ventas_unique', compact('sale', 'saleDetails', 'iva', 'TotalconIva'));
-        return $pdf->stream('factura.pdf');
+        return $pdf->download('factura.pdf');
     }
 }

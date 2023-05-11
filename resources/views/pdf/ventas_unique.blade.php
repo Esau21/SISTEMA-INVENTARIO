@@ -43,7 +43,7 @@
     <div class="card mb-4">
         <table width="100%">
             <tr>
-                <td><strong>M.A.E:</strong>Gracias pro preferirnos</td>
+                <td><strong>M.A.E:</strong>Gracias por preferirnos</td>
                 <td><strong>SERVICIOS PROFESIONALES:</strong> M.A.E S.A DE C.V</td>
             </tr>
         </table>
