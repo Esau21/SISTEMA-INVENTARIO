@@ -12,6 +12,7 @@ use App\Models\Sale;
 use App\Models\User;
 use App\Models\SaleDetails;
 use Carbon\Carbon;
+use Dompdf\Dompdf;
 use Exception;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
@@ -251,48 +252,28 @@ class PosController extends Component
             $this->emit('sale-ok', 'VENTA REGISTRADA CON EXITO, REVISA TU TICKET DE VENTA');
             $this->emit('print-ticket', $sale->id);
             $this->emit('reload-page');
-
         } catch (Exception $e) {
             DB::rollback();
             $this->emit('sale-error', $e->getMessage());
         }
 
-        return redirect()->route('ticket');
+        return redirect()->route('ticket', ['saleId' => $sale->id]);
     }
 
 
 
-    public function printTicket($userId, $reportType, $dateFrom = null, $dateTo = null)
+    public function printTicket($saleId)
     {
+        $sale = Sale::find($saleId);
+        $saleDetails = SaleDetails::where('sale_id', $saleId)->get();
 
-        $data = [];
+        $iva = 0.13;
+        
+        $ivaCalcular = $this->Iva($sale->total * $iva);
 
-        if ($reportType == 0) //Ventas del dia
-        {
-            $from = Carbon::parse(Carbon::now())->format('Y-m-d') . ' 00:00:00';
-            $to = Carbon::parse(Carbon::now())->format('Y-m-d') . ' 23:59:59';
-        } else {
-            $from = Carbon::parse($dateFrom)->format('Y-m-d') . ' 00:00:00';
-            $to = Carbon::parse($dateTo)->format('Y-m-d') . ' 23:59:59';
-        }
+        $TotalconIva = $sale->total + $ivaCalcular; 
 
-        if ($userId == 0) {
-            $data = Sale::join('users as u', 'u.id', 'sales.user_id')
-                ->select('sales.*', 'u.name as user')
-                ->whereBetween('sales.created_at', [$from, $to])
-                ->get();
-        } else {
-            $data = Sale::join('users as u', 'u.id', 'sales.user_id')
-                ->select('sales.*', 'u.name as user')
-                ->whereBetween('sales.created_at', [$from, $to])
-                ->where('user_id', $userId)
-                ->get();
-        }
-
-        $user = $userId == 0 ? 'Todos' : User::find($userId)->name;
-
-        $pdf = PDF::Loadview('pdf.ventas_unique', compact('data', 'reportType', 'user', 'dateFrom', 'dateTo'));
-
+        $pdf = PDF::loadView('pdf.ventas_unique', compact('sale', 'saleDetails', 'iva', 'TotalconIva'));
         return $pdf->download('factura.pdf');
     }
 }
