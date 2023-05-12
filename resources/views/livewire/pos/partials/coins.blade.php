@@ -6,7 +6,7 @@
                 <div class="row">
                     @foreach ($denominations as $d)
                         <div class="col-sm mt-2">
-                           {{--  <button wire:click.prevent="ACash({{ $d->value }})" class="btn btn-dark btn-block den">
+                           {{-- <button wire:click.prevent="ACash({{ $d->value }})" class="btn btn-dark btn-block den">
                                 {{ $d->value > 0 ? '$' . number_format($d->value, 2, '.', '') : 'Calcular sin Iva' }}
 
                             </button> --}}
