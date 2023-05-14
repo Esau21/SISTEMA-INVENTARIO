@@ -256,8 +256,11 @@ class PosController extends Component
             DB::rollback();
             $this->emit('sale-error', $e->getMessage());
         }
-
-        return redirect()->route('ticket', ['saleId' => $sale->id]);
+        if (isset($sale)) {
+            return redirect()->route('ticket', ['saleId' => $sale->id]);
+        } else {
+            // manejar el error si la variable $sale no está definida
+        }
     }
 
 
