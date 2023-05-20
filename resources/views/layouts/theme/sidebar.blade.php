@@ -2,33 +2,16 @@
 
     <nav id="compactSidebar">
         <ul class="menu-categories">
-
-
-            <!--Categoria-->
-            {{-- @can('Category_Index') --}}
-
-            <!--<li class="menu active">
-    <a href="#" data-active="true" class="menu-toggle">
-        <div class="base-menu">
-            <div class="base-icons">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-            </div>
-            <span>Dashboard</span>
-        </div>
-    </a>
-</li>-->
-
-            {{-- <li class="active">
-    <a href="{{url('home')}}" class="menu-toggle" data-active="true">
-    <div class="base-menu">
-        <div class="base-icons">
-            <i class="fas fa-home fa-3x"></i>
-        </div>
-        <span class="text-white">INICIO</span>
-    </div>
-    </a>
-</li> --}}
-
+            <li class="active">
+                <a href="{{ url('graficos') }}" class="menu-toggle" data-active="true">
+                    <div class="base-menu">
+                        <div class="base-icons">
+                            <i class="fas fa-chart-pie fa-3x"></i>
+                        </div>
+                        <span class="text-white">DASHBOARD</span>
+                    </div>
+                </a>
+            </li>
 
             <li class="active">
                 <a href="{{ url('categories') }}" class="menu-toggle" data-active="true">

@@ -12,6 +12,7 @@ use App\Http\Livewire\PermisosController;
 use App\Http\Livewire\AsignarController;
 use App\Http\Livewire\ClienteController;
 use App\Http\Livewire\FacturacionController;
+use App\Http\Livewire\Graficos\GraficosComponent;
 use App\Http\Livewire\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware(['auth'])->group(function () {
     Route::get('categories', CategoriesController::class);
+    Route::get('graficos', [GraficosComponent::class, 'graficos']);
     Route::get('products', ProductsController::class);
     Route::get('coins', CoinsController::class);
     Route::get('pos', PosController::class);
