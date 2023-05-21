@@ -17,6 +17,7 @@ use Exception;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Luecano\NumeroALetras\NumeroALetras;
 
 class PosController extends Component
 {
@@ -275,9 +276,19 @@ class PosController extends Component
         $ivaCalcular = $this->Iva($sale->total * $iva);
 
         $TotalconIva = $sale->total + $ivaCalcular; 
+        //Totales
+        foreach ($saleDetails as $detail){
+            $sumas = 0;
+            $ventaExenta = $detail->quantity * $detail->price;
+            $sumas += $ventaExenta;
+            $iva = $detail->sale->iva;
+            $subtotal = $sumas + $iva;
+        }
+        $formatter = new NumeroALetras();
+        $numeroAletras = $formatter->toMoney(number_format($subtotal,2,'.',''), 2, 'DÓLARES', 'CENTAVOS');
 
         //$pdf = PDF::loadView('pdf.ventas_unique', compact('sale', 'saleDetails', 'iva', 'TotalconIva'));
-        $pdf = PDF::loadView('pdf.ccf', compact('sale', 'saleDetails', 'iva', 'TotalconIva'));
-        return $pdf->download('ccf.pdf');
+        $pdf = PDF::loadView('pdf.ccf', compact('sale', 'saleDetails', 'iva', 'TotalconIva','numeroAletras'));
+        return $pdf->stream('ccf.pdf');
     }
 }
