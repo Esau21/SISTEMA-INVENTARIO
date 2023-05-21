@@ -8,7 +8,7 @@
                         <div class="card-body">
                             <div class="task-header">
                                 <div>
-                                    <h2>TOTAL: ${{number_format($total,2)}}</h2>
+                                    <h3>TOTAL: ${{number_format($total,2)}}</h3>
                                     <input type="hidden" id="hiddenTotal" value="{{$total}}">
                                 </div>
                                 <div>

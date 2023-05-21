@@ -20,6 +20,28 @@
             <div class="connect-sorting-content mt-4">
                 <div class="card simple-title-task ui-sortable-handle">
                     <div class="card-body">
+                        <div class="col-sm-12 col-md-12 mb-3">
+                            <label for="">Cliente</label>
+                            <select wire:model.lazy="cliente_id" class="form-control">
+                                <option value="">Selecc...</option>
+                                @foreach ($clientes as $cliente)
+                                    <option value="{{$cliente->id}}">{{$cliente->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-12 mb-3">
+                            <div class="form-row">
+                                <div class="col-sm-12 col-md-6">
+                                    <label class="text-center" for="">CCF</label>
+                                    <input type="radio" style="height:1.8rem" class="form-control" wire:model="tipo_docs" value="ccf">
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label class="text-center" for="">Factura</label>
+                                    <input type="radio" style="height:1.8rem" class="form-control" wire:model="tipo_docs" value="factura">
+                                </div>
+
+                            </div>
+                        </div>
                         <div class="input-group input-group-md mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text input-gp hideonsm"

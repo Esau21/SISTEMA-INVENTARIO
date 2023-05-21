@@ -21,7 +21,7 @@ use Luecano\NumeroALetras\NumeroALetras;
 
 class PosController extends Component
 {
-    public $total, $itemsQuantity, $efectivo, $change, $iva, $totalConIva;
+    public $total, $itemsQuantity, $efectivo, $change, $iva, $totalConIva,$cliente_id,$tipo_docs;
 
 
     public function mount()
@@ -34,9 +34,11 @@ class PosController extends Component
 
     public function render()
     {
+        $clientes = Clientes::orderBy('id','desc')->paginate(10);
         return view('livewire.pos.component', [
             'denominations' => Denomination::orderBy('value', 'desc')->get(),
-            'cart' => Cart::getContent()->sortBy('name')
+            'cart' => Cart::getContent()->sortBy('name'),
+            'clientes' => $clientes
         ])
             ->extends('layouts.theme.app')
             ->section('content');
@@ -223,7 +225,8 @@ class PosController extends Component
                 'cash' => $this->efectivo,
                 'change' => $this->change,
                 'iva' => $montoIva,
-                'user_id' => Auth()->user()->id
+                'user_id' => Auth()->user()->id,
+                'cliente_id' => $this->cliente_id
             ]);
 
             if ($sale) {
@@ -288,7 +291,12 @@ class PosController extends Component
         $numeroAletras = $formatter->toMoney(number_format($subtotal,2,'.',''), 2, 'DÓLARES', 'CENTAVOS');
 
         //$pdf = PDF::loadView('pdf.ventas_unique', compact('sale', 'saleDetails', 'iva', 'TotalconIva'));
-        $pdf = PDF::loadView('pdf.ccf', compact('sale', 'saleDetails', 'iva', 'TotalconIva','numeroAletras'));
+        //Validacion de Tipo de documento a emitir
+        if($this->tipo_docs == "ccf"){
+            $pdf = PDF::loadView('pdf.ccf', compact('sale', 'saleDetails', 'iva', 'TotalconIva','numeroAletras'));
+        }else{
+            $pdf = PDF::loadView('pdf.factura', compact('sale', 'saleDetails', 'iva', 'TotalconIva','numeroAletras'));
+        }
         return $pdf->stream('ccf.pdf');
     }
 }

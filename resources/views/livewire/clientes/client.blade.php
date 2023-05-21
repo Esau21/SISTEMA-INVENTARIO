@@ -73,7 +73,7 @@
             </div>
         </div>
     </div>
-   {{--  @include('livewire.category.form') --}}
+    @include('livewire.clientes.form')
 </div>
 
 <script>
@@ -83,8 +83,8 @@
             $('#theModal').modal('show')
         });
 
-        window.livewire.on('category-added', msg => {
-            $('#theModal').modal('hide')
+        window.livewire.on('cliente-added', Msg => {
+            noty(Msg)
         });
 
         window.livewire.on('category-updated', msg => {
