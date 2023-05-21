@@ -276,7 +276,8 @@ class PosController extends Component
 
         $TotalconIva = $sale->total + $ivaCalcular; 
 
-        $pdf = PDF::loadView('pdf.ventas_unique', compact('sale', 'saleDetails', 'iva', 'TotalconIva'));
-        return $pdf->download('factura.pdf');
+        //$pdf = PDF::loadView('pdf.ventas_unique', compact('sale', 'saleDetails', 'iva', 'TotalconIva'));
+        $pdf = PDF::loadView('pdf.ccf', compact('sale', 'saleDetails', 'iva', 'TotalconIva'));
+        return $pdf->download('ccf.pdf');
     }
 }

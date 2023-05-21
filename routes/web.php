@@ -13,6 +13,7 @@ use App\Http\Livewire\AsignarController;
 use App\Http\Livewire\ClienteController;
 use App\Http\Livewire\FacturacionController;
 use App\Http\Livewire\Graficos\GraficosComponent;
+use App\Http\Livewire\StockController;
 use App\Http\Livewire\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('clientes', ClienteController::class);
 });
 
+
+//NEW ROUTE
+Route::get('/stock',StockController::class);
 
 
 

@@ -38,6 +38,18 @@
                 </a>
             </li>
 
+            <!--Stock-->
+            <li class="">
+                <a href="{{ url('stock') }}" class="menu-toggle" data-active="false">
+                    <div class="base-menu">
+                        <div class="base-icons">
+                            <i class="fas fa-box fa-3x"></i>
+                        </div>
+                        <span class="text-white">Stock</span>
+                    </div>
+                </a>
+            </li>
+
             <!--ventas-->
             <li class=" ">
                 <a href="{{ url('pos') }}" class="menu-toggle" data-active="false">
