@@ -277,8 +277,8 @@ class PosController extends Component
 
         $TotalconIva = $sale->total + $ivaCalcular; 
         //Totales
+        $sumas = 0;
         foreach ($saleDetails as $detail){
-            $sumas = 0;
             $ventaExenta = $detail->quantity * $detail->price;
             $sumas += $ventaExenta;
             $iva = $detail->sale->iva;

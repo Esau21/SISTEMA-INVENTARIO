@@ -97,9 +97,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $sumas = 0; ?>
                             @foreach ($saleDetails as $detail)
                             <?php
-                                $sumas = 0;
                                 $ventaExenta = $detail->quantity * $detail->price;
                                 $sumas += $ventaExenta;
                                 $iva = $detail->sale->iva;
@@ -181,11 +181,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php $sumas = 0; ?>
                                     @foreach ($saleDetails as $detail)
                                     <?php
-                                        $sumas = 0;
-                                        $ventaExenta = $detail->quantity * $detail->price;
-                                        $sumas += $ventaExenta;
+                                        $ventaExenta = (int)$detail->quantity * (float)$detail->price;
+                                        $sumas += (float)$ventaExenta;
                                         $iva = $detail->sale->iva;
                                         $subtotal = $sumas + $iva;
                                     ?>

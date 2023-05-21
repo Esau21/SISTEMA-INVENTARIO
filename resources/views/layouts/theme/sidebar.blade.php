@@ -110,7 +110,7 @@
                 </a>
             </li>
 
-            {{-- <!--clientes-->
+            <!--clientes-->
             <li class=" ">
                 <a href="{{ url('clientes') }}" class="menu-toggle" data-active="false">
                     <div class="base-menu">
@@ -121,7 +121,6 @@
                     </div>
                 </a>
             </li>
- --}}
             <!--Monedas-->
             <li class=" ">
                 <a href="{{ url('coins') }}" class="menu-toggle" data-active="false">
