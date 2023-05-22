@@ -210,6 +210,14 @@ class PosController extends Component
             $this->emit('sale-error', 'EL EFECTIVO DEBE SER MAYOR O IGUAL AL TOTAL');
             return;
         }
+        if($this->cliente_id == ""){
+            $this->emit('err-empty','POR FAVOR, SELECCIONA UN CLIENTE!!');
+            return 0;
+        }
+        if($this->tipo_docs ==""){
+            $this->emit('err-type_docs','POR FAVOR, SELECCIONA UN TIPO DE DOCUMENTO (CCF o Factura)!!');
+            return 0;
+        }
 
         DB::beginTransaction();
 
@@ -261,17 +269,16 @@ class PosController extends Component
             $this->emit('sale-error', $e->getMessage());
         }
         if (isset($sale)) {
-            return redirect()->route('ticket', ['saleId' => $sale->id]);
-        } else {
-            
+            return redirect()->route('ticket', ['saleId' => $sale->id,'type_docs' => $this->tipo_docs]);
         }
     }
 
 
 
-    public function printTicket($saleId)
+    public function printTicket($saleId,$type_docs)
     {
         $sale = Sale::find($saleId);
+        $clients = Clientes::find($sale->cliente_id);
         $saleDetails = SaleDetails::where('sale_id', $saleId)->get();
 
         $iva = 0.13;
@@ -292,11 +299,13 @@ class PosController extends Component
 
         //$pdf = PDF::loadView('pdf.ventas_unique', compact('sale', 'saleDetails', 'iva', 'TotalconIva'));
         //Validacion de Tipo de documento a emitir
-        if($this->tipo_docs == "ccf"){
-            $pdf = PDF::loadView('pdf.ccf', compact('sale', 'saleDetails', 'iva', 'TotalconIva','numeroAletras'));
+        if($type_docs == 'ccf'){
+            $pdf = PDF::loadView('pdf.ccf', compact('sale', 'saleDetails', 'iva', 'TotalconIva','numeroAletras','clients'));
+            return $pdf->stream('ccf.pdf');
         }else{
-            $pdf = PDF::loadView('pdf.factura', compact('sale', 'saleDetails', 'iva', 'TotalconIva','numeroAletras'));
+            $pdf = PDF::loadView('pdf.factura', compact('sale', 'saleDetails', 'iva', 'TotalconIva','numeroAletras','clients'));
+            return $pdf->stream('factura.pdf');
         }
-        return $pdf->stream('ccf.pdf');
+        
     }
 }

@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('products', ProductsController::class);
     Route::get('coins', CoinsController::class);
     Route::get('pos', PosController::class);
-    Route::get('/ticket/{saleId}', [PosController::class, 'printTicket'])->name('ticket');
+    Route::get('/ticket/{saleId}/{type_docs}', [PosController::class, 'printTicket'])->name('ticket');
 
     
     Route::group(['middleware' => ['role:Admin']], function () {

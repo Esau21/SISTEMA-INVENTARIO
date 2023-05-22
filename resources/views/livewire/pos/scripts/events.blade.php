@@ -4,6 +4,14 @@
             noty(Msg)
         });
 
+        window.livewire.on('err-type_docs',Msg =>{
+            noty(Msg)
+        })
+
+        window.livewire.on('err-empty', Msg => {
+            noty(Msg);
+        })
+
         window.livewire.on('scan-es', Msg => {
             noty(Msg)
         });

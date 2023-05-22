@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Comprobante de Crédito Fiscal</title>
+    <title>Factura</title>
     <style>
         body {
             font-family: Helvetica, sans-serif, Arial;
@@ -73,9 +73,9 @@
                 <div class="info">
                     <table style="width: 100%;">
                         <tr>
-                            <td><strong>Cliente:</strong> La Cascada S.A DE C.V</td>
-                            <td><strong>Dirección:</strong> San Salvador, calle principal</td>
-                            <td><strong>Fecha:</strong> 18-05-2023</td>
+                            <td><strong>Cliente:</strong> {{$clients->name}}</td>
+                            <td><strong>Dirección:</strong> {{$clients->direccion}}</td>
+                            <td><strong>Fecha:</strong> {{date('d-m-Y')}}</td>
                         </tr>
                     </table>
                 </div>
@@ -152,14 +152,9 @@
                         <div class="info">
                             <table style="width: 100%;">
                                 <tr>
-                                    <td><strong>Cliente:</strong> La Cascada S.A DE C.V</td>
-                                    <td><strong>Dirección:</strong> San Salvador, calle principal</td>
-                                    <td><strong>Fecha:</strong> 18-05-2023</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>NIT:</strong> 0001-234567-890-1</td>
-                                    <td><strong>NRC:</strong> 89834-1</td>
-                                    <td><strong>GIRO:</strong> Venta al por mayor de refresco</td>
+                                    <td><strong>Cliente:</strong> {{$clients->name}}</td>
+                                    <td><strong>Dirección:</strong> {{$clients->direccion}}</td>
+                                    <td><strong>Fecha:</strong> {{date('d-m-Y')}}</td>
                                 </tr>
                             </table>
                         </div>
