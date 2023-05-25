@@ -11,6 +11,9 @@ class Clientes extends Model
 
     protected $fillable = ['name', 'direccion', 'nit', 'nrc', 'giro', 'telefono'];
 
-   
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
 
 }

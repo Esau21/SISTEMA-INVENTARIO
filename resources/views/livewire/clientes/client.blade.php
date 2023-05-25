@@ -52,16 +52,15 @@
                                     <td class="text-center">
 
                                         <a href="javascript:void(0)" wire:click="Edit({{ $c->id }})"
-                                            class="btn btn-dark mtmobile" title="Edit"><i
-                                                class="fas fa-edit"></i></a>
+                                            class="btn btn-dark mtmobile" title="Edit"><i class="fas fa-edit"></i></a>
 
 
-
-                                       {{--  <a href="javascript:void(0)"
-                                            onclick="Confirm('{{ $c->id }}', '{{ $c->sale->count() }}')"
-                                            class="btn btn-danger" title="Delete"><i class="fas fa-trash-alt">E</i></a> 
-
+{{-- 
+                                        <a href="javascript:void(0)"
+                                            onclick="Confirm('{{ $c->id }}', '{{ $c->sales->count() }}')"
+                                            class="btn btn-danger" title="Delete"><i class="fas fa-trash-alt">E</i></a>
  --}}
+
 
                                     </td>
                                 </tr>
@@ -99,8 +98,8 @@
 
 
 
-    function Confirm(id, sale) {
-        if (sale > 0) {
+    function Confirm(id, sales) {
+        if (sales > 0) {
             swal('No se puede eliminar el cliente ya que posee una venta')
             return;
         }
