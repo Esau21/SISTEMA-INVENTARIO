@@ -117,7 +117,7 @@
     <script>
         Highcharts.chart('sale', {
             chart: {
-                type: 'bar'
+                type: 'line'
             },
             title: {
                 text: 'VENTAS POR USUARIOS: <?php echo $totalUsuariosVentas; ?>',

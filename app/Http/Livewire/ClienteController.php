@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Clientes;
+use Facade\FlareClient\Http\Client;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -65,6 +66,49 @@ class ClienteController extends Component
         $cliente->save();
 
         $this->emit('cliente-added', 'Cliente agregado');
+    }
+
+    public function Edit($id)
+    {
+        $clientes = Clientes::find($id, ['id', 'name', 'direccion', 'nit', 'nrc', 'giro', 'telefono']);
+        $this->selected_id = $clientes->id;
+        $this->name = $clientes->name;
+        $this->direccion = $clientes->direccion;
+        $this->nit = $clientes->nit;
+        $this->nrc = $clientes->nrc;
+        $this->giro = $clientes->giro;
+        $this->telefono = $clientes->telefono;
+        $this->emit('show-modal', 'Modal show');
+    }
+
+    public function Update()
+    {
+
+        $cliente = Clientes::find($this->selected_id);
+
+        $cliente->update([
+            'name' => $this->name,
+            'direccion' => $this->direccion,
+            'nit' => $this->nit,
+            'nrc' => $this->nrc,
+            'giro' => $this->giro,
+            'telefono' => $this->telefono
+        ]);
+
+        $this->emit('cliente-updated', 'Cliente actualizado');
+    }
+
+    protected $listeners = [
+        'deleteRow' => 'Destroy'
+    ];
+
+
+    public function Destroy(Clientes $cliente)
+    {
+        $cliente->delete();
+
+        $this->resetUI();
+        $this->emit('cliente-delete', 'Cliente eliminado');
     }
 
 }

@@ -57,11 +57,11 @@
 
 
 
-                                        {{-- <a href="javascript:void(0)"
-                                            onclick="Confirm('{{ $category->id }}', '{{ $category->products->count() }}')"
-                                            class="btn btn-danger" title="Delete"><i class="fas fa-trash-alt">E</i></a> --}}
+                                       {{--  <a href="javascript:void(0)"
+                                            onclick="Confirm('{{ $c->id }}', '{{ $c->sale->count() }}')"
+                                            class="btn btn-danger" title="Delete"><i class="fas fa-trash-alt">E</i></a> 
 
-
+ --}}
 
                                     </td>
                                 </tr>
@@ -87,18 +87,21 @@
             noty(Msg)
         });
 
-        window.livewire.on('category-updated', msg => {
+        window.livewire.on('cliente-updated', msg => {
             $('#theModal').modal('hide')
         });
 
+        window.livewire.on('cliente-delete', Msg => {
+            noty(Msg)
+        });
 
     });
 
 
 
-    function Confirm(id, products) {
-        if (products > 0) {
-            swal('No se puede eliminar la categoria por que esta tiene una relacion con un producto')
+    function Confirm(id, sale) {
+        if (sale > 0) {
+            swal('No se puede eliminar el cliente ya que posee una venta')
             return;
         }
 
