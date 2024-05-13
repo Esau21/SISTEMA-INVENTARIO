@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reportes de ventas</title>
+    <title>Reportes de servicios al cliente</title>
     <link rel="stylesheet" href="{{ asset('css/custom_pdf.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom_page.css') }}">
 </head>
@@ -22,9 +22,9 @@
                 </td align="center">
                 <td align="center" width="70%" class="text-left text-company" style="vertical-align: top; padding-top: 10px;">
                     @if($reportType == 0)
-                        <span style="font-size: 16px;"><strong>Reporte de ventas del dia</strong></span>
+                        <span style="font-size: 16px;"><strong>Reporte de servicios del dia</strong></span>
                     @else
-                        <span style="font-size: 16px;"><strong>Reporte de ventaas por fecha</strong></span>
+                        <span style="font-size: 16px;"><strong>Reporte de servicios por fecha</strong></span>
                     @endif
                     <br>
                     @if($reportType !=0)
@@ -44,9 +44,9 @@
             <thead>
                 <tr>
                     <th width="10%">FOLIO</th>
-                    <th width="12%">IMPORTE</th>
-                    <th width="10%">ITEMS</th>
-                    <th width="12%">STATUS</th>
+                    <th width="12%">TOTAL</th>
+                    <th width="10%">MANO OBRA</th>
+                    <th width="12%">PRODUCTO</th>
                     <th>USUARIO</th>
                     <th width="18%">FECHA</th>
                 </tr>
@@ -56,9 +56,9 @@
                     <tr>
                         <td align="center">{{$item->id}}</td>
                         <td align="center">${{number_format($item->total,2)}}</td>
-                        <td align="center">{{$item->items}}</td>
-                        <td align="center">{{$item->status}}</td>
-                        <td align="center">{{$item->user}}</td>
+                        <td align="center">{{$item->manoobra}}</td>
+                        <td align="center">{{$item->nombrepro}}</td>
+                        <td align="center">{{$item->username}}</td>
                         <td align="center">{{$item->created_at}}</td>
                     </tr>
                 @endforeach
@@ -70,9 +70,6 @@
                     </td>
                     <td colspan="1" class="text-center">
                         <span><strong>${{number_format($data->sum('total'),2)}}</strong></span>
-                    </td>
-                    <td class="text-center">
-                        <span><strong>${{number_format($data->sum('items'),2)}}</strong></span>
                     </td>
                     <td colspan="3" class="text-center"></td>
                 </tr>

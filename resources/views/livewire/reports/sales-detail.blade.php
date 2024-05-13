@@ -45,17 +45,6 @@
                     </tfoot>
                 </table>
             </div>
-
-
-
-
-
-
-
-
-
-
-
         </div>
         <div class="modal-footer">
             <button type="button"  class="btn btn-outline-danger close-btn text-danger" data-dismiss="modal"><i class="fas fa-ban"></i> CERRAR</button>

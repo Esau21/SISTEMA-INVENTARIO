@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>M.A.E DE S.A DE C.V</title>
-    <link rel="icon" type="image/x-icon"  href="{{ asset('img/edmae.png') }}"/>
+    <title>@yield('title', 'SOLUMAQ')</title>
+    <link rel="icon" type="image/x-icon"  href="{{ asset('img/ol.jpeg') }}"/>
     
     
 

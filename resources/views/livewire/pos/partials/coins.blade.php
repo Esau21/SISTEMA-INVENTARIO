@@ -5,15 +5,15 @@
             <div class="container">
                 <div class="row">
                     @foreach ($denominations as $d)
-                        <div class="col-sm mt-2">
-                           {{-- <button wire:click.prevent="ACash({{ $d->value }})" class="btn btn-dark btn-block den">
-                                {{ $d->value > 0 ? '$' . number_format($d->value, 2, '.', '') : 'Calcular sin Iva' }}
+                    <div class="col-sm mt-2">
+                        {{-- <button wire:click.prevent="ACash({{ $d->value }})" class="btn btn-dark btn-block den">
+                            {{ $d->value > 0 ? '$' . number_format($d->value, 2, '.', '') : 'Calcular sin Iva' }}
 
-                            </button> --}}
-                            <button wire:click.prevent="Iva({{ $d->value }})" class="btn btn-dark btn-block den">
-                                {{ $d->value > 0 ? '$' . number_format($d->value, 2, '.', '') : 'Calcular con Iva' }}
-                            </button>
-                        </div>
+                        </button> --}}
+                        <button wire:click.prevent="Iva({{ $d->value }})" class="btn btn-dark btn-block den">
+                            {{ $d->value > 0 ? '$' . number_format($d->value, 2, '.', '') : 'Calcular con Iva' }}
+                        </button>
+                    </div>
                     @endforeach
                 </div>
             </div>
@@ -25,7 +25,7 @@
                             <select wire:model.lazy="cliente_id" class="form-control">
                                 <option value="">Selecc...</option>
                                 @foreach ($clientes as $cliente)
-                                    <option value="{{$cliente->id}}">{{$cliente->name}}</option>
+                                <option value="{{$cliente->id}}">{{$cliente->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -33,13 +33,19 @@
                             <div class="form-row">
                                 <div class="col-sm-12 col-md-6">
                                     <label class="text-center" for="">CCF</label>
-                                    <input type="radio" style="height:1.8rem" class="form-control" wire:model="tipo_docs" value="ccf">
+                                    <input type="radio" style="height:1.8rem" class="form-control"
+                                        wire:model="tipo_docs" value="ccf">
                                 </div>
                                 <div class="col-sm-12 col-md-6">
                                     <label class="text-center" for="">Factura</label>
-                                    <input type="radio" style="height:1.8rem" class="form-control" wire:model="tipo_docs" value="factura">
+                                    <input type="radio" style="height:1.8rem" class="form-control"
+                                        wire:model="tipo_docs" value="factura">
                                 </div>
-
+                                <div class="col-sm-12 col-md-6">
+                                    <label class="text-center" for="">Cotizacion</label>
+                                    <input type="radio" style="height:1.8rem" class="form-control"
+                                        wire:model="tipo_docs" value="cotizacion">
+                                </div>
                             </div>
                         </div>
                         <div class="input-group input-group-md mb-3">
@@ -62,17 +68,17 @@
                         <div class="row justify-content-between mt-5">
                             <div class="col-sm-12 col-md-12 col-lg-6">
                                 @if ($total > 0)
-                                    <button onclick="Confirm('','clearCart','¿SEGURO DE ELIMINAR EL CARRITO?')"
-                                        class="btn btn-dark mtmobile">
-                                        CANCELAR F4
-                                    </button>
+                                <button onclick="Confirm('','clearCart','¿SEGURO DE ELIMINAR EL CARRITO?')"
+                                    class="btn btn-dark mtmobile">
+                                    CANCELAR F4
+                                </button>
                                 @endif
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-6">
                                 @if ($efectivo >= $total && $total > 0)
-                                    <button wire:click.prevent="saveSale" class="btn btn-dark btn-md btn-block">
-                                        GUARDAR F9
-                                    </button>
+                                <button wire:click.prevent="saveSale" class="btn btn-dark btn-md btn-block">
+                                    GUARDAR F9
+                                </button>
                                 @endif
                             </div>
                         </div>

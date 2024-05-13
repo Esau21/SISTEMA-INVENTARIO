@@ -16,7 +16,7 @@
                                     <select wire:model="userId" class="form-control">
                                         <option value="0">Todos</option>
                                         @foreach($users as $user)
-                                            <option value="{{$user->id}}">{{$user->name}}</option>
+                                        <option value="{{$user->id}}">{{$user->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -26,8 +26,8 @@
                                 <h6>Elije el tipo de reporte</h6>
                                 <div class="form-group">
                                     <select wire:model="reportType" class="form-control">
-                                        <option value="0">Ventas del dia</option>
-                                        <option value="1">Ventas por fecha</option>
+                                        <option value="0">servicios del dia</option>
+                                        <option value="1">servicios por fecha</option>
                                     </select>
                                 </div>
                             </div>
@@ -35,14 +35,16 @@
                             <div class="col-sm-12 mt-2">
                                 <h6>Fecha desde</h6>
                                 <div class="form-group">
-                                    <input type="text" wire:model="dateFrom" class="form-control flatpickr" placeholder="Click para Elegir">
+                                    <input type="text" wire:model="dateFrom" class="form-control flatpickr"
+                                        placeholder="Click para Elegir">
                                 </div>
                             </div>
                             {{--Aqui hacemos el select de las ventas anuales --}}
                             <div class="col-sm-12 mt-2">
                                 <h6>Fecha hasta</h6>
                                 <div class="form-group">
-                                    <input type="text" wire:model="dateTo" class="form-control flatpickr" placeholder="Click para Elegir">
+                                    <input type="text" wire:model="dateTo" class="form-control flatpickr"
+                                        placeholder="Click para Elegir">
                                 </div>
                             </div>
                             {{--Aqui hacemos los botones para exportar y consultar --}}
@@ -52,10 +54,13 @@
                                 </button>
 
                                 <a class="btn btn-outline-danger btn-block btn-lg {{count($data) <1 ? 'disabled' : '' }}"
-                                href="{{ url('report/pdf' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}" target="_blank"><i class="fas fa-file-pdf fa-2x"></i> Exportar PDF</a>
+                                    href="{{ url('reporteservices/pdf' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}"
+                                    target="_blank"><i class="fas fa-file-pdf fa-2x"></i> Exportar PDF</a>
 
-                               {{--  <a class="btn btn-outline-success btn-block btn-lg {{count($data) <1 ? 'disabled' : '' }}"
-                                href="{{ url('report/excel' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}" target="_blank"><i class="fas fa-file-excel fa-2x"></i> Exportar Excel</a> --}}
+                                {{-- <a
+                                    class="btn btn-outline-success btn-block btn-lg {{count($data) <1 ? 'disabled' : '' }}"
+                                    href="{{ url('report/excel' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}"
+                                    target="_blank"><i class="fas fa-file-excel fa-2x"></i> Exportar Excel</a> --}}
                             </div>
                         </div>
                     </div>
@@ -67,36 +72,50 @@
                                     <tr>
                                         <th class="table-th text-white text-center">FOLIO</th>
                                         <th class="table-th text-center text-white">TOTAL</th>
-                                        <th class="table-th text-center text-white">ITEMS</th>
-                                        <th class="table-th text-center text-white">STATUS</th>
+                                        <th class="table-th text-center text-white">MANO OBRA</th>
+                                        <th class="table-th text-center text-white">DESCRIPCION</th>
                                         <th class="table-th text-center text-white">USUARIO</th>
                                         <th class="table-th text-center text-white">FECHA</th>
                                         <th class="table-th text-center text-white" width="50px"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if(count($data) <1)
-                                        <tr><td colspan="7"><h5>Sin resultados de ventas</h5></td></tr>
-                                    @endif
-                                    @foreach($data as $d)
+                                    @if(count($data) <1) <tr>
+                                        <td colspan="7">
+                                            <h5>Sin resultados de ventas</h5>
+                                        </td>
+                                        </tr>
+                                        @endif
+                                        @foreach($data as $d)
                                         <tr>
-                                            <td class="text-center"><h6>{{$d->id}}</h6></td>
-                                            <td class="text-center"><h6>${{number_format($d->total,2)}}</h6></td>
-                                            <td class="text-center"><h6>{{$d->items}}</h6></td>
-                                            <td class="text-center"><h6>{{$d->status}}</h6></td>
-                                            <td class="text-center"><h6>{{$d->user}}</h6></td">
+                                            <td class="text-center">
+                                                <h6>{{$d->id}}</h6>
+                                            </td>
+                                            <td class="text-center">
+                                                <h6>${{number_format($d->total,2)}}</h6>
+                                            </td>
+                                            <td class="text-center">
+                                                <h6>{{$d->manoobra}}</h6>
+                                            </td>
+                                            <td class="text-center">
+                                                <h6>{{$d->observaciones}}</h6>
+                                            </td>
+                                            <td class="text-center">
+                                                <h6>{{$d->username}}</h6>
+                                                </td">
                                             <td class="text-center">
                                                 <h6>
                                                     {{\Carbon\Carbon::parse($d->created_at)->format('Y-m-d')}}
                                                 </h6>
-                                            </td">
+                                                </td">
                                             <td class="text-center" width="50px">
-                                                <button wire:click.prevent="getDetails({{$d->id}})" class="btn btn-dark btn-sm">
+                                                <button wire:click.prevent="getDetailsServices({{$d->id}})"
+                                                    class="btn btn-dark btn-sm">
                                                     <i class="fas fa-list"></i>
                                                 </button>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -105,7 +124,7 @@
             </div>
         </div>
     </div>
-   @include('livewire.reports.sales-detail')
+    @include('livewire.services.form')
 </div>
 
 <script>

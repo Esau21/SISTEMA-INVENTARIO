@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Comprobante de Credito fiscal</title>
+    <title>Comprobante de Cotizacion</title>
     <style>
         body {
             font-family: Helvetica, sans-serif, Arial;

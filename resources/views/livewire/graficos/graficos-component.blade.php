@@ -1,84 +1,97 @@
 @extends('layouts.theme.app')
 @section('content')
-    <div>
-        <div class="container mt-5">
-            <div class="card">
-                <div class="row">
-                    <div class="col">
-                        <div id="products">
+<div>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="row">
+                <div class="col">
+                    <div id="products">
 
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="container mt-5">
-            <div class="card">
-                <div class="row">
-                    <div class="col">
-                        <div id="sale">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container mt-5">
-            <div class="card">
-                <div class="row">
-                    <div class="col">
-                        <div id="vsale">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container mt-5">
-            <div class="card">
-                <div class="row">
-                    <div class="col">
-                        <div id="cate">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container mt-5">
-            <div class="card">
-                <div class="row">
-                    <div class="col">
-                        <div id="user">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="row">
+                <div class="col">
+                    <div id="cotizaciones">
 
-    <?php
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="row">
+                <div class="col">
+                    <div id="sale">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="row">
+                <div class="col">
+                    <div id="vsale">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="row">
+                <div class="col">
+                    <div id="cate">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="row">
+                <div class="col">
+                    <div id="user">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<?php
     $totalproductos = count($products);
     ?>
 
-    <script>
-        Highcharts.chart('products', {
+
+<script>
+    Highcharts.chart('products', {
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                type: 'pie'
+                type: 'bar'
             },
             title: {
                 text: `TOTAL DE PRODUCTOS EN EL SISTEMA: <?php echo $totalproductos; ?>`,
@@ -108,16 +121,78 @@
                 data: <?php echo json_encode($products); ?>
             }]
         });
-    </script>
+</script>
 
-    <?php
+
+<?php
+    $totalcotizaciones = count($cotizaciones);
+?>
+
+<script>
+    Highcharts.chart('cotizaciones', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'SERVICIOS POR USUARIOS: <?php echo $totalcotizaciones; ?>',
+                align: 'center'
+            },
+            subtitle: {
+                text: 'SERVICIOS POR USUARIOS: <?php echo $totalcotizaciones; ?>',
+                align: 'left'
+            },
+            xAxis: {
+                title: {
+                    text: null
+                },
+                gridLineWidth: 1,
+                lineWidth: 0
+            },
+            yAxis: {
+                min: 0,
+                labels: {
+                    overflow: 'justify'
+                },
+                gridLineWidth: 0
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: '50%',
+                    dataLabels: {
+                        enabled: true
+                    },
+                    groupPadding: 0.1
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 80,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Mano Obra',
+                data: <?php echo json_encode($cotizaciones); ?>
+            }]
+        });
+</script>
+
+<?php
     $totalUsuariosVentas = count($sale);
     ?>
 
-    <script>
-        Highcharts.chart('sale', {
+<script>
+    Highcharts.chart('sale', {
             chart: {
-                type: 'line'
+                type: 'pie'
             },
             title: {
                 text: 'VENTAS POR USUARIOS: <?php echo $totalUsuariosVentas; ?>',
@@ -169,15 +244,15 @@
                 data: <?php echo json_encode($sale); ?>
             }]
         });
-    </script>
+</script>
 
 
-    <?php
+<?php
     $totalcate = count($cate);
     ?>
 
-    <script>
-        // Data retrieved from https://olympics.com/en/olympic-games/beijing-2022/medals
+<script>
+    // Data retrieved from https://olympics.com/en/olympic-games/beijing-2022/medals
         Highcharts.chart('cate', {
             chart: {
                 type: 'pie',
@@ -205,13 +280,13 @@
                 data: <?php echo json_encode($cate); ?>
             }]
         });
-    </script>
+</script>
 
 
-    <?php $totalvsale = count($vsale); ?>
+<?php $totalvsale = count($vsale); ?>
 
-    <script>
-        Highcharts.chart('vsale', {
+<script>
+    Highcharts.chart('vsale', {
             chart: {
                 type: 'area',
                 options3d: {
@@ -277,13 +352,13 @@
                 data: <?php echo json_encode($vsale); ?>
             }]
         });
-    </script>
+</script>
 
 
-    <?php $totalu = count($user) ?>
+<?php $totalu = count($user) ?>
 
-    <script>
-        // Data retrieved from https://olympics.com/en/olympic-games/beijing-2022/medals
+<script>
+    // Data retrieved from https://olympics.com/en/olympic-games/beijing-2022/medals
         Highcharts.chart('user', {
             chart: {
                 type: 'pie',
@@ -311,5 +386,5 @@
                 data: <?php echo json_encode($user); ?>
             }]
         });
-    </script>
+</script>
 @endsection

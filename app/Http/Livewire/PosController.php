@@ -21,7 +21,7 @@ use Luecano\NumeroALetras\NumeroALetras;
 
 class PosController extends Component
 {
-    public $total, $itemsQuantity, $efectivo, $change, $iva, $totalConIva,$cliente_id,$tipo_docs;
+    public $total, $itemsQuantity, $efectivo, $change, $iva, $totalConIva, $cliente_id, $tipo_docs;
 
 
     public function mount()
@@ -34,7 +34,7 @@ class PosController extends Component
 
     public function render()
     {
-        $clientes = Clientes::orderBy('id','desc')->paginate(10);
+        $clientes = Clientes::orderBy('id', 'desc')->paginate(10);
         return view('livewire.pos.component', [
             'denominations' => Denomination::orderBy('value', 'desc')->get(),
             'cart' => Cart::getContent()->sortBy('name'),
@@ -210,12 +210,12 @@ class PosController extends Component
             $this->emit('sale-error', 'EL EFECTIVO DEBE SER MAYOR O IGUAL AL TOTAL');
             return;
         }
-        if($this->cliente_id == ""){
-            $this->emit('err-empty','POR FAVOR, SELECCIONA UN CLIENTE!!');
+        if ($this->cliente_id == "") {
+            $this->emit('err-empty', 'POR FAVOR, SELECCIONA UN CLIENTE!!');
             return 0;
         }
-        if($this->tipo_docs ==""){
-            $this->emit('err-type_docs','POR FAVOR, SELECCIONA UN TIPO DE DOCUMENTO (CCF o Factura)!!');
+        if ($this->tipo_docs == "") {
+            $this->emit('err-type_docs', 'POR FAVOR, SELECCIONA UN TIPO DE DOCUMENTO (CCF, Cotizacion o Factura)!!');
             return 0;
         }
 
@@ -269,43 +269,45 @@ class PosController extends Component
             $this->emit('sale-error', $e->getMessage());
         }
         if (isset($sale)) {
-            return redirect()->route('ticket', ['saleId' => $sale->id,'type_docs' => $this->tipo_docs]);
+            return redirect()->route('ticket', ['saleId' => $sale->id, 'type_docs' => $this->tipo_docs]);
         }
     }
 
 
 
-    public function printTicket($saleId,$type_docs)
+    public function printTicket($saleId, $type_docs)
     {
         $sale = Sale::find($saleId);
         $clients = Clientes::find($sale->cliente_id);
         $saleDetails = SaleDetails::where('sale_id', $saleId)->get();
 
         $iva = 0.13;
-        
+
         $ivaCalcular = $this->Iva($sale->total * $iva);
 
-        $TotalconIva = $sale->total + $ivaCalcular; 
+        $TotalconIva = $sale->total + $ivaCalcular;
         //Totales
         $sumas = 0;
-        foreach ($saleDetails as $detail){
+        foreach ($saleDetails as $detail) {
             $ventaExenta = $detail->quantity * $detail->price;
             $sumas += $ventaExenta;
             $iva = $detail->sale->iva;
             $subtotal = $sumas + $iva;
         }
         $formatter = new NumeroALetras();
-        $numeroAletras = $formatter->toMoney(number_format($subtotal,2,'.',''), 2, 'DÓLARES', 'CENTAVOS');
+        $numeroAletras = $formatter->toMoney(number_format($subtotal, 2, '.', ''), 2, 'DÓLARES', 'CENTAVOS');
 
         //$pdf = PDF::loadView('pdf.ventas_unique', compact('sale', 'saleDetails', 'iva', 'TotalconIva'));
         //Validacion de Tipo de documento a emitir
-        if($type_docs == 'ccf'){
-            $pdf = PDF::loadView('pdf.ccf', compact('sale', 'saleDetails', 'iva', 'TotalconIva','numeroAletras','clients'));
+        if ($type_docs == 'ccf') {
+            $pdf = PDF::loadView('pdf.ccf', compact('sale', 'saleDetails', 'iva', 'TotalconIva', 'numeroAletras', 'clients'));
             return $pdf->stream('ccf.pdf');
-        }else{
-            $pdf = PDF::loadView('pdf.factura', compact('sale', 'saleDetails', 'iva', 'TotalconIva','numeroAletras','clients'));
+        } elseif ($type_docs == 'cotizacion') {
+            $pdf = PDF::loadView('pdf.cotizacion', compact('sale', 'saleDetails', 'iva', 'TotalconIva', 'numeroAletras', 'clients'));
+            return $pdf->stream('cotizacion.pdf');
+        } else {
+            $pdf = PDF::loadView('pdf.factura', compact('sale', 'saleDetails', 'iva', 'TotalconIva', 'numeroAletras', 'clients'));
             return $pdf->stream('factura.pdf');
         }
-        
     }
 }

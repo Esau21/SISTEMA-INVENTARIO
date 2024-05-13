@@ -14,7 +14,7 @@ class ProductSeeder extends Seeder
     public function run()
     {
         Product::create([
-            'name' => 'LARAVEL LIVE WIRE',
+            'name' => 'LLANTAS TRACTOR',
             'cost' => 200,
             'price' => 350,
             'barcode' => '75010065987',
@@ -25,7 +25,7 @@ class ProductSeeder extends Seeder
         ]);
 
         Product::create([
-            'name' => 'RUNNING NIKE',
+            'name' => 'BUJIAS',
             'cost' => 600,
             'price' => 1500,
             'barcode' => '76098872014',
@@ -36,7 +36,7 @@ class ProductSeeder extends Seeder
         ]);
 
         Product::create([
-            'name' => 'IPHONE 11',
+            'name' => 'RADIADORES',
             'cost' => 900,
             'price' => 1400,
             'barcode' => '7709876541',
@@ -47,7 +47,7 @@ class ProductSeeder extends Seeder
         ]);
 
         Product::create([
-            'name' => 'PC GAMER',
+            'name' => 'ELEVADORES DE VEHICULOS',
             'cost' => 790,
             'price' => 1350,
             'barcode' => '790654812',

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Graficos;
 
 use App\Models\Category;
+use App\Models\Cotization;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\User;
@@ -54,7 +55,7 @@ class GraficosComponent extends Component
 
         $cate = [];
 
-        foreach($categories as $c) {
+        foreach ($categories as $c) {
             $cate[] = ['name' => $c['name'], 'y' => floatval($c['name'])];
         }
 
@@ -63,7 +64,13 @@ class GraficosComponent extends Component
         $user = [];
 
         foreach ($users as $u) {
-            $user[] = ['name' => $u['name'], 'y' =>floatval($u['name'])];
+            $user[] = ['name' => $u['name'], 'y' => floatval($u['name'])];
+        }
+
+        $cotizaciones = Cotization::all();
+        $coti = [];
+        foreach ($cotizaciones as $co) {
+            $coti[] = ['total' => $co['total'], 'y' => floatval($co['iva'])];
         }
 
         $variables = [
@@ -71,6 +78,8 @@ class GraficosComponent extends Component
             'sale' => $sale,
             'vsale' => $vsale,
             'cate' => $cate,
+            'cotizaciones' => $cotizaciones,
+            'co' => $co,
             'user' => $user,
         ];
 
