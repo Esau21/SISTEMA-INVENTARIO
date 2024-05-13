@@ -1,0 +1,4 @@
+services:
+  default:
+    environment:
+      PHP_VERSION: "7.4"
