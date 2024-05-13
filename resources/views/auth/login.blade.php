@@ -1,73 +1,81 @@
-@extends('layouts.app')
+<link rel="icon" type="image/x-icon" href="{{ asset('img/ma.png') }}" />
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/css/authentication/form-2.css') }}" rel="stylesheet" type="text/css" />
+<!-- END GLOBAL MANDATORY STYLES -->
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/forms/theme-checkbox-radio.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/forms/switches.css') }}">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+
+
+<div class="form-container outer">
+    <div class="form-form">
+        <div class="form-form-wrap">
+            <div class="form-container">
+                <div class="form-content">
+
+                    <h1 class="">ACCESO AL SISTEMA SOLUMAQ S.A DE C.V</h1>
+
+                    <form class="text-left" action="{{ route('login') }}" method="POST">
                         @csrf
+                        <div class="form">
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
+                            <div id="username-field" class="field-wrapper input">
+                                <label class="badge badge-white mb-3" for="username">EMAIL</label>
+                                <input id="email" type="text" name="email"
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    placeholder="Ingresa tu usuario o email">
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
+                            <div id="password-field" class="field-wrapper input mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <label class="badge badge-white" for="password">CONTRASEÑA</label>
+                                </div>
+                                <input id="password" name="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" id="toggle-password" class="feather feather-eye">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+                            <div class="d-sm-flex justify-content-between">
+                                <div class="field-wrapper">
+                                    <button type="submit" class="btn btn-primary" value="">Ingresar</button>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
+
+
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+
+
+<!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+<script src="{{ asset('assets/js/libs/jquery-3.1.1.min.js') }}"></script>
+
+
+<!-- END GLOBAL MANDATORY SCRIPTS -->
+<script src="{{ asset('assets/js/authentication/form-2.js') }}"></script>

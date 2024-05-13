@@ -18,11 +18,11 @@
             </tr>
             <tr>
                 <td align="center" width="30%" style="vertical-align: top; padding-top: 10px; position: relative;">
-                    <img src="{{ asset('assets/img/ed.png') }}" alt="" class="invoice-logo">
+                    <img src="{{ asset('img/ol.png') }}" alt="" class="invoice-logo">
                 </td align="center">
                 <td align="center" width="70%" class="text-left text-company" style="vertical-align: top; padding-top: 10px;">
                     @if($reportType == 0)
-                        <span style="font-size: 16px;"><strong>Reporte de ventaas del dia</strong></span>
+                        <span style="font-size: 16px;"><strong>Reporte de ventas del dia</strong></span>
                     @else
                         <span style="font-size: 16px;"><strong>Reporte de ventaas por fecha</strong></span>
                     @endif
@@ -87,7 +87,7 @@
                     <span>Sistema de Ventas</span>
                 </td>
                 <td class="text-center">
-                    EsauDev.com
+                    grupo.com
                 </td>
                 <td class="text-center" width="20%">
                     Pagina <span class="pagenum"></span>

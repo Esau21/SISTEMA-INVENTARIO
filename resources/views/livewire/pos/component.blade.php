@@ -39,6 +39,15 @@
         @include('livewire.pos.scripts.general')
         @include('livewire.pos.scripts.scan')
         @include('livewire.pos.scripts.shortcuts')
+<script>
+    
+</script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
 
-        
+        window.livewire.on('err-type-docs', msg => {
+            console.log('Error type mensaje');
+        });
+    });
+</script>

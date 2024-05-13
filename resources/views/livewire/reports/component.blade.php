@@ -54,8 +54,8 @@
                                 <a class="btn btn-outline-danger btn-block btn-lg {{count($data) <1 ? 'disabled' : '' }}"
                                 href="{{ url('report/pdf' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}" target="_blank"><i class="fas fa-file-pdf fa-2x"></i> Exportar PDF</a>
 
-                                <a class="btn btn-outline-success btn-block btn-lg {{count($data) <1 ? 'disabled' : '' }}"
-                                href="{{ url('report/excel' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}" target="_blank"><i class="fas fa-file-excel fa-2x"></i> Exportar Excel</a>
+                               {{--  <a class="btn btn-outline-success btn-block btn-lg {{count($data) <1 ? 'disabled' : '' }}"
+                                href="{{ url('report/excel' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}" target="_blank"><i class="fas fa-file-excel fa-2x"></i> Exportar Excel</a> --}}
                             </div>
                         </div>
                     </div>

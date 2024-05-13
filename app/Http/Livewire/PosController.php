@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Clientes;
 use Livewire\Component;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use App\Models\Denomination;
@@ -10,14 +11,17 @@ use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\Sale;
 use App\Models\User;
 use App\Models\SaleDetails;
+use Carbon\Carbon;
+use Dompdf\Dompdf;
 use Exception;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Luecano\NumeroALetras\NumeroALetras;
 
 class PosController extends Component
 {
-    public $total, $itemsQuantity, $efectivo, $change;
+    public $total, $itemsQuantity, $efectivo, $change, $iva, $totalConIva, $cliente_id, $tipo_docs;
 
 
     public function mount()
@@ -30,25 +34,39 @@ class PosController extends Component
 
     public function render()
     {
+        $clientes = Clientes::orderBy('id', 'desc')->paginate(10);
         return view('livewire.pos.component', [
             'denominations' => Denomination::orderBy('value', 'desc')->get(),
-            'cart' => Cart::getContent()->sortBy('name')
+            'cart' => Cart::getContent()->sortBy('name'),
+            'clientes' => $clientes
         ])
             ->extends('layouts.theme.app')
             ->section('content');
     }
 
-    public function ACash($value)
+    /* public function ACash($value)
     {
         $this->efectivo += ($value == 0 ? $this->total : $value);
         $this->change = ($this->efectivo - $this->total);
+    } */
+
+    public function Iva($value)
+    {
+        $iva = 0.13;
+
+        $precioProducto = ($value == 0 ? $this->total : $value);
+        $montoIva = $precioProducto * $iva;
+        $this->totalConIva = $precioProducto + $montoIva;
+        $this->efectivo += $precioProducto + $montoIva;
     }
+
 
     protected $listeners = [
         'scan-code' => 'ScanCode',
         'removeItem' => 'removeItem',
         'clearCart' => 'clearCart',
-        'saveSale' => 'saveSale'
+        'saveSale' => 'saveSale',
+        'reload-page' => '$refresh',
     ];
 
     public function ScanCode($barcode, $cant = 1)
@@ -180,7 +198,7 @@ class PosController extends Component
 
     public function saveSale()
     {
-        if ($this->total <=0) {
+        if ($this->total <= 0) {
             $this->emit('sale-error', 'AGREGAR PRODUCTOS A LA VENTA');
             return;
         }
@@ -192,18 +210,32 @@ class PosController extends Component
             $this->emit('sale-error', 'EL EFECTIVO DEBE SER MAYOR O IGUAL AL TOTAL');
             return;
         }
+        if ($this->cliente_id == "") {
+            $this->emit('err-empty', 'POR FAVOR, SELECCIONA UN CLIENTE!!');
+            return 0;
+        }
+        if ($this->tipo_docs == "") {
+            $this->emit('err-type_docs', 'POR FAVOR, SELECCIONA UN TIPO DE DOCUMENTO (CCF, Cotizacion o Factura)!!');
+            return 0;
+        }
 
         DB::beginTransaction();
 
         try {
 
-             $sale = Sale::create([
+            $iva = 0.13;
+            $totalConIva = $this->total * (1 + $iva);
+            $montoIva = $totalConIva - $this->total;
+
+            $sale = Sale::create([
                 'total' => $this->total,
                 'items' => $this->itemsQuantity,
                 'cash' => $this->efectivo,
                 'change' => $this->change,
-                'user_id' => Auth()->user()->id
-            ]); 
+                'iva' => $montoIva,
+                'user_id' => Auth()->user()->id,
+                'cliente_id' => $this->cliente_id
+            ]);
 
             if ($sale) {
                 $items = Cart::getContent();
@@ -225,23 +257,57 @@ class PosController extends Component
             DB::commit();
 
             Cart::clear();
-            $this->efectivo =0;
-            $this->change =0;
+            $this->efectivo = 0;
+            $this->change = 0;
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
             $this->emit('sale-ok', 'VENTA REGISTRADA CON EXITO, REVISA TU TICKET DE VENTA');
             $this->emit('print-ticket', $sale->id);
-
+            $this->emit('reload-page');
         } catch (Exception $e) {
             DB::rollback();
             $this->emit('sale-error', $e->getMessage());
         }
+        if (isset($sale)) {
+            return redirect()->route('ticket', ['saleId' => $sale->id, 'type_docs' => $this->tipo_docs]);
+        }
     }
 
-    public function printTicket($sale)
+
+
+    public function printTicket($saleId, $type_docs)
     {
-       return Redirect::to("print//$sale->id");
-    }
+        $sale = Sale::find($saleId);
+        $clients = Clientes::find($sale->cliente_id);
+        $saleDetails = SaleDetails::where('sale_id', $saleId)->get();
 
-   
+        $iva = 0.13;
+
+        $ivaCalcular = $this->Iva($sale->total * $iva);
+
+        $TotalconIva = $sale->total + $ivaCalcular;
+        //Totales
+        $sumas = 0;
+        foreach ($saleDetails as $detail) {
+            $ventaExenta = $detail->quantity * $detail->price;
+            $sumas += $ventaExenta;
+            $iva = $detail->sale->iva;
+            $subtotal = $sumas + $iva;
+        }
+        $formatter = new NumeroALetras();
+        $numeroAletras = $formatter->toMoney(number_format($subtotal, 2, '.', ''), 2, 'DÓLARES', 'CENTAVOS');
+
+        //$pdf = PDF::loadView('pdf.ventas_unique', compact('sale', 'saleDetails', 'iva', 'TotalconIva'));
+        //Validacion de Tipo de documento a emitir
+        if ($type_docs == 'ccf') {
+            $pdf = PDF::loadView('pdf.ccf', compact('sale', 'saleDetails', 'iva', 'TotalconIva', 'numeroAletras', 'clients'));
+            return $pdf->stream('ccf.pdf');
+        } elseif ($type_docs == 'cotizacion') {
+            $pdf = PDF::loadView('pdf.cotizacion', compact('sale', 'saleDetails', 'iva', 'TotalconIva', 'numeroAletras', 'clients'));
+            return $pdf->stream('cotizacion.pdf');
+        } else {
+            $pdf = PDF::loadView('pdf.factura', compact('sale', 'saleDetails', 'iva', 'TotalconIva', 'numeroAletras', 'clients'));
+            return $pdf->stream('factura.pdf');
+        }
+    }
 }

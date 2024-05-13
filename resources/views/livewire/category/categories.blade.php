@@ -43,13 +43,13 @@
                                 <td class="text-center">
                                    
                                     <a href="javascript:void(0)" wire:click="Edit({{$category->id}})"
-                                        class="btn btn-dark mtmobile" title="Edit"><i class="fas fa-edit"></i>E</a>
+                                        class="btn btn-dark mtmobile" title="Edit"><i class="fas fa-edit"></i></a>
                                     
 
                                        
                                     <a href="javascript:void(0)"
                                         onclick="Confirm('{{$category->id}}', '{{$category->products->count()}}')"
-                                        class="btn btn-danger" title="Delete"><i class="fas fa-trash-alt">E</i></a>
+                                        class="btn btn-danger" title="Delete"><i class="fas fa-trash-alt"></i></a>
                                         
 
 

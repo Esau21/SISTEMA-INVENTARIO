@@ -47,11 +47,11 @@
     }
     /*BackGround Sidebar*/
     .sidebar-theme #compactSidebar {
-    background: #191e3a !important;
+    background: #FC7300 !important;
     }
     /*BackGround Sidebar Collapse*/
     .header-container .sidebarCollapse {
-    color: #3B3F !important;
+    color: #3b3f5c !important;
 }
 
  /*search box background*/
@@ -68,7 +68,7 @@
 
 .navbar {
     padding: 0 0 0 20px;
-    background: #191e3a;
+    background: #ffffff;
     min-height: 80px;
     border-bottom: 1px solid #3b3f;
     -webkit-transition: .3s ease all;
