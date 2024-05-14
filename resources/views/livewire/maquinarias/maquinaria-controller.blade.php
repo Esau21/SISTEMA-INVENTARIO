@@ -37,7 +37,6 @@
                                     <th class="table-th text-center text-white">TOTAL</th>
                                     <th class="table-th text-center text-white">AÑO</th>
                                     <th class="table-th text-center text-white">MODELO</th>
-                                    <th class="table-th text-center text-white">IMAGEN</th>
                                     <th class="table-th text-center text-white">PROCESOS</th>
                                 </tr>
                             </thead>
@@ -65,14 +64,15 @@
                                     </td>
                                     <td class="text-center text-dark text-uppercase">
                                         <span class="badge badge-dark">
-                                            {{\Carbon\Carbon::parse($m->hora_salida)->format('H:i:s')}}
+                                            {{ \Carbon\Carbon::parse($m->hora_salida)->format('h:i:s A') }}
                                         </span>
                                     </td>
                                     <td class="text-center text-dark text-uppercase">
                                         <span class="badge badge-warning">
-                                            {{\Carbon\Carbon::parse($m->hora_entrega)->format('H:i:s')}}
+                                            {{ \Carbon\Carbon::parse($m->hora_entrega)->format('h:i:s A') }}
                                         </span>
                                     </td>
+                                    
                                     <td class="text-center text-dark text-uppercase">
                                         ${{number_format($m->price, 2)}}
                                     </td>
@@ -90,12 +90,6 @@
                                     <td class="text-center text-dark text-uppercase">
                                         <span class="badge badge-secondary text-white">
                                             {{$m->model}}
-                                        </span>
-                                    </td>
-                                    <td class="text-center text-dark text-uppercase">
-                                        <span class="badge badge-white text-white">
-                                            <img src="{{ asset('storage/maquinarias/' . $m->image) }}" width="70px;" class="img-fluid"
-                                                alt="ejemplo">
                                         </span>
                                     </td>
                                     <td class="text-center d-grid">

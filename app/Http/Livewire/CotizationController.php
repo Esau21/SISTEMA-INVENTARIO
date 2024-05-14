@@ -17,7 +17,7 @@ class CotizationController extends Component
     use WithPagination;
     use WithFileUploads;
 
-    public $search, $nombrepro, $image, $fechacotizacion, $observaciones, $price, $selected_id,
+    public $search, $nombrepro, $fechacotizacion, $observaciones, $price, $selected_id,
         $manoobra, $total_manoobra, $iva, $total, $clienteId, $usuarioId, $pageTitle, $componentName;
     private $pagination = 5;
 
@@ -114,7 +114,6 @@ class CotizationController extends Component
 
         $cotization = Cotization::create([
             'nombrepro' => $this->nombrepro,
-            'image' => $this->image,
             'fechacotizacion' => $this->fechacotizacion,
             'observaciones' => $this->observaciones,
             'price' => $this->price,
@@ -126,13 +125,7 @@ class CotizationController extends Component
             'usuarioId' => $this->usuarioId,
         ]);
 
-        $customFileImage;
-        if ($this->image) {
-            $customFileImage = uniqid() . '_.' . $this->image->extension();
-            $this->image->storeAs('public/cotizaciones', $customFileImage);
-            $cotization->image = $customFileImage;
-            $cotization->save();
-        }
+        $cotization->save();
 
         $this->emit('add-manoobra', 'COTIZACION AGREGADA CON EXITO');
     }
@@ -140,13 +133,12 @@ class CotizationController extends Component
     public function Edit($id)
     {
         $coti = Cotization::find($id, [
-            'id', 'nombrepro', 'image', 'fechacotizacion', 'observaciones', 'price', 'manoobra', 'total_manoobra',
+            'id', 'nombrepro', 'fechacotizacion', 'observaciones', 'price', 'manoobra', 'total_manoobra',
             'iva', 'total', 'clienteId', 'usuarioId'
         ]);
 
         $this->selected_id = $coti->id;
         $this->nombrepro = $coti->nombrepro;
-        $this->image = $coti->image;
         $this->fechacotizacion = $coti->fechacotizacion;
         $this->observaciones = $coti->observaciones;
         $this->price = $coti->price;
@@ -166,7 +158,6 @@ class CotizationController extends Component
         $coti = Cotization::find($this->selected_id);
         $coti->update([
             'nombrepro' => $this->nombrepro,
-            'image' => $this->image,
             'fechacotizacion' => $this->fechacotizacion,
             'observaciones' => $this->observaciones,
             'price' => $this->price,
@@ -178,37 +169,16 @@ class CotizationController extends Component
             'usuarioId' => $this->usuarioId,
         ]);
 
-        if ($this->image) {
-            $customFileImage = uniqid() . '_.' . $this->image->extension();
-            $this->image->storeAs('public/cotizaciones', $customFileImage);
-            $imageName = $coti->image;
-            $coti->image = $customFileImage;
-            $coti->save();
-
-
-            if ($imageName != null) {
-                if (file_exists('storage/cotizaciones' . $imageName)) {
-                    unlink('storage/cotizaciones' . $imageName);
-                }
-            }
-        }
-
+        $coti->save();
         $this->resetUI();
         $this->emit('update-coti', 'SERVICIO ACTUZLIAZADO');
     }
 
     public function Destroy(Cotization $cotization)
     {
-        $imageTemp = $cotization->image;
         $cotization->delete();
 
-        if($imageTemp !=null)
-        {
-            if(file_exists('storage/cotizaciones/' . $imageTemp ))
-            {
-                unlink('storage/cotizaciones/' . $imageTemp);
-            }
-        }
+        
 
         $this->resetUI();
         $this->emit('coti-deleted', 'SERVICIO DE MANO DE OBRA ELIMINADA');

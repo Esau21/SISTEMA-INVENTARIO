@@ -22,7 +22,6 @@ class Maquinaria extends Model
         'total',
         'year',
         'model',
-        'image',
         'clienteId'
     ];
 }

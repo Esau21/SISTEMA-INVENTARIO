@@ -63,8 +63,6 @@
                         <td class="text-center text-dark">
                             <span>
                                 <p class="text-sm text-dark text-center">{{ $cotizacion->nombrepro }}</p>
-                                <img src="{{ asset('storage/cotizaciones/' . $cotizacion->image) }}"
-                                    width="40px;" alt="ejemploimagen">
                             </span>
                         </td>
                         <td class="text-left text-dark text-sm" colspan="3">{{$cotizacion->observaciones}}</td>

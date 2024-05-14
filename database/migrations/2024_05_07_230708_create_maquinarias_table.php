@@ -27,7 +27,6 @@ class CreateMaquinariasTable extends Migration
             $table->float('total');
             $table->string('year');
             $table->string('model');
-            $table->string('image');
 
             $table->integer('clienteId')->unsigned();
 
