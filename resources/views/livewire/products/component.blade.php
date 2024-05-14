@@ -35,42 +35,43 @@
                         </thead>
                         <tbody>
                             @foreach ($data as $product)
-                                <tr>
-                                    <td>
-                                        <h6 class="text-left">{{ $product->name }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="text-center">{{ $product->barcode }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="text-center">{{ $product->category }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="text-center">${{ $product->price }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="text-center">{{ $product->stock }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="text-center">{{ $product->alerts }}</h6>
-                                    </td>
-                                    <td class="text-center">
-                                        <span>
-                                            <img src="{{ asset('storage/products/' . $product->imagen) }}"
-                                                alt="imagen de ejemplo" height="70" width="80" class="rounded">
-                                        </span>
-                                    </td>
-                                    <td class="text-center">
+                            <tr>
+                                <td>
+                                    <h6 class="text-left">{{ $product->name }}</h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-center">{{ $product->barcode }}</h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-center">{{ $product->category }}</h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-center">${{ $product->price }}</h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-center">{{ $product->stock }}</h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-center">{{ $product->alerts }}</h6>
+                                </td>
+                                <td class="text-center">
+                                    <span>
+                                        <img src="{{ asset('storage/products/' . $product->imagen) }}"
+                                            alt="imagen de ejemplo" height="70" width="80" class="rounded">
+                                    </span>
+                                </td>
+                                <td class="text-center">
 
-                                        <a href="javascript:void(0)" wire:click.prevent="Edit({{ $product->id }})"
-                                            class="btn btn-dark mtmobile" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <a href="javascript:void(0)" wire:click.prevent="Edit({{ $product->id }})"
+                                        class="btn btn-dark mtmobile" title="Edit"><i class="fas fa-edit"></i></a>
 
-
-                                        <a href="javascript:void(0)" onclick="Confirm('{{ $product->id }}')"
-                                            class="btn btn-danger" title="Delete"><i class="fas fa-trash"></i></a>
-
-                                    </td>
-                                </tr>
+                                        <a href="javascript:void(0)" onclick="Confirm('{{ $product->id }}', '{{ $product->sales ? $product->sales->count() : 0 }}', '{{ $product->saleDetails ? $product->saleDetails->count() : 0 }}')"
+                                            class="btn btn-danger" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                         </a>                                         
+                                                                                
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -102,26 +103,27 @@
         });
     });
 
-    function Confirm(id, products) {
-        if (products > 0) {
-            swal('No se puede eliminar la categoria por que esta tiene una relacion con un producto')
-            return;
-        }
-
-        swal({
-            title: 'CONFIRMAR',
-            text: '¿CONFIRMA ELIMINAR EL REGISTRO?',
-            type: 'warning',
-            showCancelButton: true,
-            cancelButtonText: 'Cerrar',
-            cancelButtonColor: '#fff',
-            confirmButtonColor: '#3B3F5C',
-            confirmButtonText: 'Aceptar'
-        }).then(function(result) {
-            if (result.value) {
-                window.livewire.emit('deleteRow', id)
-                swal.close()
-            }
-        })
+    function Confirm(id, sales, saleDetails) {
+    if (sales > 0 || saleDetails > 0) {
+        swal('No se puede eliminar el producto porque tiene ventas o detalles de ventas asociados');
+        return;
     }
+
+    swal({
+        title: 'CONFIRMAR',
+        text: '¿CONFIRMA ELIMINAR EL REGISTRO?',
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Cerrar',
+        cancelButtonColor: '#fff',
+        confirmButtonColor: '#3B3F5C',
+        confirmButtonText: 'Aceptar'
+    }).then(function(result) {
+        if (result.value) {
+            window.livewire.emit('deleteRow', id);
+            swal.close();
+        }
+    });
+}
+
 </script>

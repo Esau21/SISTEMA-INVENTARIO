@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'barcode','cost','price','stock','alerts','image','category_id'];
+    protected $fillable = ['name', 'barcode','cost','price','stock','alerts','image','category_id', 'saledetail_id'];
 
 
     public function category()
@@ -17,6 +17,11 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function saleDetails()
+    {
+        return $this->hasMany(SaleDetails::class);
+    }
+    
     public function getImagenAttribute()
     {
         if(file_exists('storage/products/' . $this->image))
