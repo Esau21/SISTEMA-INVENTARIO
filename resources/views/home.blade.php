@@ -9,7 +9,7 @@
             </b>
             <b>
                 <p class="lead text-dark">Bienvendios al sistema de control de ventas e inventario puedes ver las utimas
-                    actualizaciones del sistema</p>
+                    actualizaciones del sistema.</p>
             </b>
         </div>
         <div class="col-12 col-lg-6 mt-5 d-flex justify-content-center align-items-center">

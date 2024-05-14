@@ -1,9 +1,9 @@
     <link href="{{asset('assets/css/loader.css')}}" rel="stylesheet" type="text/css" /> 
     <script src="{{asset('assets/js/loader.js')}}"></script>
     
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
+    <link href="{{ asset('https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap') }}" rel="stylesheet">
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/lux/bootstrap.min.css"> --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css') }}" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     {{-- <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" /> --}}
     <link href="{{asset('assets/css/plugins.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/structure.css')}}" rel="stylesheet" type="text/css" class="structure" />
