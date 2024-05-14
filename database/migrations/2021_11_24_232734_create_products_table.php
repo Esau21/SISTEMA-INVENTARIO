@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateProductsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * 232734 Run the migrations.
      *
      * @return void
      */
@@ -24,6 +24,7 @@ class CreateProductsTable extends Migration
             $table->string('image',100)->nullable();
 
             $table->unsignedBigInteger('category_id');
+
             $table->foreign('category_id')->references('id')->on('categories');
 
             $table->timestamps();
