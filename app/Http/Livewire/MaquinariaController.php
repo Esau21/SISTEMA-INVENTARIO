@@ -17,7 +17,7 @@ class MaquinariaController extends Component
 
     public $pageTitle, $componentName, $selected_id,
         $name, $description, $status, $fecha_salida, $fecha_entrega,
-        $hora_salida, $hora_entrega, $price, $iva, $total, $year, $model, $image, $clienteId, $search;
+        $hora_salida, $hora_entrega, $price, $iva, $total, $year, $model, $clienteId, $search;
 
     private $pagination = 5;
 
@@ -119,19 +119,10 @@ class MaquinariaController extends Component
             'total' => $this->total,
             'year' => $this->year,
             'model' => $this->model,
-            'image' => $this->image,
             'clienteId' => $this->clienteId,
         ]);
 
-        $customFileImage;
-
-        if($this->image)
-        {
-            $customFileImage = uniqid() . '_.' . $this->image->extension();
-            $this->image->storeAs('public/maquinarias', $customFileImage);
-            $maquinarias->image = $customFileImage;
-            $maquinarias->save();
-        }
+        $maquinarias->save();
 
         $this->emit('maqui-add', 'EL SERVICIO SE INSERTO CORRECTAMENTE.');
     }
@@ -141,7 +132,7 @@ class MaquinariaController extends Component
         $maqui = Maquinaria::find($id, 
         ['id', 'name', 'description', 
         'status', 'fecha_salida', 'fecha_entrega', 
-        'hora_salida', 'hora_entrega', 'price', 'iva', 'total', 'year', 'model', 'image', 'clienteId']);
+        'hora_salida', 'hora_entrega', 'price', 'iva', 'total', 'year', 'model', 'clienteId']);
 
         $this->selected_id = $maqui->id;
         $this->name = $maqui->name;
@@ -156,7 +147,6 @@ class MaquinariaController extends Component
         $this->total = $maqui->total;
         $this->year = $maqui->year;
         $this->model = $maqui->model;
-        $this->image = $maqui->image;
         $this->clienteId = $maqui->clienteId;
 
         $this->emit('show-modal');
@@ -178,24 +168,10 @@ class MaquinariaController extends Component
             'total' => $this->total,
             'year' => $this->year,
             'model' => $this->model,
-            'image' => $this->image,
             'clienteId' => $this->clienteId,
         ]);
 
-        if($this->image){
-            $customFileImage = uniqid() . '_.' . $this->image->extension();
-            $this->image->storeAs('public/maquinarias', $customFileImage);
-            $imageName = $machinaries->image;
-            $machinaries->image = $customFileImage;
-            $machinaries->save();
-
-            if($imageName !=null){
-                if(file_exists('storage/maquinarias' . $imageName)){
-                    unlink('storage/maquinarias' . $imageName);
-                }
-            }
-        }
-
+        $machinaries->save();
         $this->resetUI();
         $this->emit('update-machinaries', 'EQUIPO DE MAQUINARIA ACTULIZADA CORRECTAMENTE');
     }
@@ -205,17 +181,10 @@ class MaquinariaController extends Component
 
     public function Destroy(Maquinaria $maquinarias)
     {
-        $imageTemp = $maquinarias->image;
+
         $maquinarias->delete();
 
-        if($imageTemp !=null)
-        {
-            if(file_exists('storage/maquinarias/' . $imageTemp ))
-            {
-                unlink('storage/maquinarias/' . $imageTemp);
-            }
-        }
-
+        
         $this->resetUI();
         $this->emit('maqui-deleted', 'SERVICIO DE MAQUINARIA ELIMINADA');
 

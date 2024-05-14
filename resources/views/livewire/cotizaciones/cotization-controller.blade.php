@@ -26,7 +26,6 @@
                                 <tr>
                                     <th class="table-th text-white">ID</th>
                                     <th class="table-th text-white">NOMBRE</th>
-                                    <th class="table-th text-center text-white">IMAGEN</th>
                                     <th class="table-th text-center text-white">FECHA_COTIZACION</th>
                                     <th class="table-th text-center text-white">OBSERVACIONES</th>
                                     <th class="table-th text-center text-white">CLIENTE</th>
@@ -44,10 +43,6 @@
                                 <tr>
                                     <td class="table-th text-dark">{{ $coti->id }}</td>
                                     <td class="table-th text-dark">{{ $coti->nombrepro }}</td>
-                                    <td class="table-th text-dark">
-                                        <img src="{{ asset('storage/cotizaciones/' . $coti->image) }}" class="img-fluid"
-                                            width="50px;" height="50px;" alt="ejemplo">
-                                    </td>
                                     <td class="table-th text-dark text-center">{{
                                         \Carbon\Carbon::parse($coti->fechacotizacion)->format('d/m/Y') }}</td>
                                     <td class="table-th text-dark text-center">{{ $coti->observaciones }}</td>

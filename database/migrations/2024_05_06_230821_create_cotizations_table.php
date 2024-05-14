@@ -16,7 +16,6 @@ class CreateCotizationsTable extends Migration
         Schema::create('cotizations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombrepro');
-            $table->string('image')->nullable();
             $table->date('fechacotizacion')->nullable();
             $table->string('observaciones');
             $table->float('price');

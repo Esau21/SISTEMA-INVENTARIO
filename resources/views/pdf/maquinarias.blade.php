@@ -64,8 +64,6 @@
                         <td class="text-center text-dark">
                             <span>
                                 <p class="text-sm text-dark text-center">{{ $maquinariasP->name }}</p>
-                                <img src="{{ asset('storage/maquinarias/' . $maquinariasP->image) }}"
-                                    width="40px;" alt="ejemploimagen">
                             </span>
                         </td>
                         <td class="text-center text-dark text-sm">{{$maquinariasP->model}}</td>
@@ -94,8 +92,8 @@
                     <tr>
                         <td class="text-center text-dark">{{\Carbon\Carbon::parse($maquinariasP->fecha_salida)->format('d/m/Y')}}</td>
                         <td class="text-center text-dark">{{\Carbon\Carbon::parse($maquinariasP->fecha_entrega)->format('d/m/Y')}}</td>
-                        <td class="text-center text-dark">{{\Carbon\Carbon::parse($maquinariasP->hora_salida)->format('H:i:s')}}</td>
-                        <td class="text-center text-dark">{{\Carbon\Carbon::parse($maquinariasP->hora_entrega)->format('H:i:s')}}</td>
+                        <td class="text-center text-dark">{{\Carbon\Carbon::parse($maquinariasP->hora_salida)->format('H:i:s A')}}</td>
+                        <td class="text-center text-dark">{{\Carbon\Carbon::parse($maquinariasP->hora_entrega)->format('H:i:s A')}}</td>
                     </tr>
                 </tbody>
             </table>
