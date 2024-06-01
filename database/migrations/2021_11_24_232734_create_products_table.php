@@ -17,6 +17,9 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name',255);
             $table->string('barcode',25)->nullable();
+            $table->string('descripcion');
+            $table->enum('servico_obra', ['SI', 'NO'])->default('SI')->nullable();
+            $table->decimal('servicio', 10,2)->default(0);
             $table->decimal('cost',10,2)->default(0);
             $table->decimal('price',10,2)->default(0);
             $table->integer('stock');

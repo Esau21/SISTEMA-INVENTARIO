@@ -1,236 +1,421 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Factura</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: Helvetica, sans-serif, Arial;
-            font-size: 14px;
+            font-family: Arial, sans-serif;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 16px;
+        .invoice-box {
+            width: 800px;
+            height: 1000px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid #000;
+            font-size: 12px;
+            line-height: 18px;
+            color: #000;
+            position: relative;
+            box-sizing: border-box;
         }
 
-        .header h1 {
-            font-size: 24px;
-            margin: 0;
+        .invoice-box img.logo {
+            width: 150px;
         }
 
-        .info {
-            margin-bottom: 20px;
+        .invoice-box img.background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: auto;
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
+            z-index: -1;
         }
 
-        .info table {
+        .invoice-box table {
             width: 100%;
+            line-height: inherit;
+            text-align: left;
             border-collapse: collapse;
         }
 
-        .info table td {
+        .invoice-box table td,
+        .invoice-box table th {
             padding: 5px;
+            border: 1px solid #000;
+            vertical-align: top;
         }
 
-        .items {
-            margin-bottom: 20px;
-        }
-
-        .items table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .items table thead th {
-            background-color: #f2f2f2;
+        .invoice-box table tr.heading th {
+            background: #eee;
+            border-bottom: 2px solid #000;
+            font-weight: bold;
             text-align: center;
-            padding: 4px;
         }
 
-        .items table tbody td {
-            padding: 6px;
+        .invoice-box table tr.item td {
+            border-bottom: 1px solid #000;
         }
 
-        .items table tbody td.text-right {
+        .right-text {
             text-align: right;
         }
 
-        .items table tbody td.text-left {
-            text-align: left;
+        .center-text {
+            text-align: center;
+        }
+
+        .bordered {
+            border: 1px solid #000;
+        }
+
+        .top-title {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .sub-title {
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .table-section {
+            margin-bottom: 20px;
+        }
+
+        @page {
+            size: 300mm 400mm;
+            margin: 10px;
+        }
+
+        .code-vertical {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            text-align: center;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        /* Ajuste del ancho de la columna de descripción */
+        .invoice-box table td.description {
+            width: 40%;
+        }
+
+        /* Ajustes adicionales para evitar desbordamiento */
+        .top-right {
+            max-width: 250px;
+            padding: 10px;
+        }
+
+        .top-right .bordered {
+            padding: 2px;
+        }
+
+        .top-right .vertical-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-size: 14px;
+            white-space: nowrap;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 
 <body>
-    <div class="ccf-original" style="margin-top: 60px;">
-        <center>
-            <img src="{{ asset('img/ol.png') }}" alt="" width="40px;" height="40px;">
-        </center>
-        <h6>SOLUMAQ S.A DE C.V</h6>
-        <h6>Direccion: San Salvador, El salvador.</h6>
-        <h6>Telefono: (+503)7789-9987</h6>
-        <div class="info">
-            <table style="width: 100%;">
-                <tr>
-                    <td><strong>Cliente:</strong> {{$clients->name}}</td>
-                    <td><strong>Dirección:</strong> {{$clients->direccion}}</td>
-                    <td><strong>Fecha:</strong> {{date('d-m-Y')}}</td>
-                </tr>
-            </table>
-        </div>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="6" style="border:none;">
+                    <table>
+                        @foreach ($saleDetails as $detail)
+                        <tr>
+                            <td style="border:none;">
+                                <img src="{{ asset('img/ol.png') }}" class="logo">
+                            </td>
+                            <td style="border:none; text-align:center;">
+                                <div class="top-title">SOLUMAQ S.A DE C.V</div>
+                                <div class="sub-title">CARRETERA A LOS PLANES DE RENDEROS, KM 3 INTERPRETACION AUTOPISTA
+                                    COMALAPA SAN SALVADOR, EL SALVADOR.</div>
+                                <div class="sub-title">Teléfono: 7541-3365</div>
+                                <div class="sub-title">Correo: progresamasuls@gmail.com</div>
+                            </td>
+                            <td class="top-right" style="border: 1px solid #000;">
+                                <div class="top-title" style="font-size: 18px; font-weight: bold; text-align: center;">
+                                    FACTURA</div>
+                                <div style="margin-top: 5px; text-align: left;">
+                                    N°. <span class="" style="padding: 3px;">
+                                        {{$detail->id}}
+                                    </span>
+                                </div>
 
-        <div class="items">
-            <table style="width: 100%;">
-                <thead>
-                    <tr>
-                        <th colspan="2" style="width: 10%;">Cantidad</th>
-                        <th style="width: 50%;">Descripción</th>
-                        <th colspan="2" style="width: 10%;">Precio unitario</th>
-                        <th colspan="2" style="width: 10%;">Venta exentas</th>
-                        <th colspan="2" style="width: 10%;">Ventas gravadas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $sumas = 0; ?>
-                    @foreach ($saleDetails as $detail)
-                    <?php
-                                $ventaExenta = $detail->quantity * $detail->price;
-                                $sumas += $ventaExenta;
-                                $iva = $detail->sale->iva;
-                                $subtotal = $sumas + $iva;
-                            ?>
-                    <tr style="">
-                        <td colspan="2" style="width: 10%; text-align: center; ">{{ number_format($detail->quantity,0)
-                            }}</td>
-                        <td style="width: 50%; text-align: left;">{{ $detail->product->name }}</td>
-                        <td colspan="2" style="width: 10%; text-align: right; ">${{ number_format($detail->price, 2) }}
-                        </td>
-                        <td colspan="2" style="width: 10%; text-align: right; ">
-                            $0</td>
-                        <td colspan="2" style="width: 10%; text-align: right; ">${{$ventaExenta}}</td>
-                    </tr>
-                    @endforeach
-                    <tr>
-                        <td colspan="3" rowspan="1" style="padding:10px">{{$numeroAletras}}</td>
-                        <td colspan="2" style="text-align: right;">Sumas:</td>
-                        <td colspan="2" style="text-align: right;"></td>
-                        <td colspan="2" style="text-align: right;">${{$sumas}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" rowspan="1"
-                            style="text-align: center; color: #f2f2f2; background:#222;padding:6px">VENTA MAYORES A
-                            $400.00 RELLENAR INFORMACIÓN</td>
-                        <td colspan="2" style="text-align: right;background:#f2f2f2">IVA:</td>
-                        <td colspan="2" style="text-align: right;"></td>
-                        <td colspan="2" style="text-align: right;">${{$iva}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" rowspan="1">Entregado:</td>
-                        <td colspan="2" style="text-align: right; background:#f2f2f2">Subtotal:</td>
-                        <td colspan="2" style="text-align: right;"></td>
-                        <td colspan="2" style="text-align: right;">${{$subtotal}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" rowspan="1">Firma</td>
-                        <td colspan="2" style="text-align: right; background:#f2f2f2">Ventas exentas:</td>
-                        <td colspan="2" style="text-align: right;"></td>
-                        <td colspan="2" style="text-align: right;"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" rowspan="1">DUI:</td>
-                        <td colspan="2" style="text-align: right; background:#f2f2f2">Venta Total:</td>
-                        <td colspan="2" style="text-align: right;"></td>
-                        <td colspan="2" style="text-align: right;">${{$subtotal}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p style="text-align: right;">Original emisor</p>
-        </div>
-    </div>
-    <div class="ccf-original" style="margin-top: 60px;">
-        <!--         <div class="header">
-                            <h1>Comprobante de Crédito Fiscal</h1>
-                        </div> -->
-
-        <div class="info">
-            <table style="width: 100%;">
-                <tr>
-                    <td><strong>Cliente:</strong> {{$clients->name}}</td>
-                    <td><strong>Dirección:</strong> {{$clients->direccion}}</td>
-                    <td><strong>Fecha:</strong> {{date('d-m-Y')}}</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="items">
-            <table style="width: 100%;">
-                <thead>
-                    <tr>
-                        <th colspan="2" style="width: 10%;">Cantidad</th>
-                        <th style="width: 50%;">Descripción</th>
-                        <th colspan="2" style="width: 10%;">Precio unitario</th>
-                        <th colspan="2" style="width: 10%;">Venta exentas</th>
-                        <th colspan="2" style="width: 10%;">Ventas gravadas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $sumas = 0; ?>
-                    @foreach ($saleDetails as $detail)
-                    <?php
-                                        $ventaExenta = (int)$detail->quantity * (float)$detail->price;
-                                        $sumas += (float)$ventaExenta;
-                                        $iva = $detail->sale->iva;
-                                        $subtotal = $sumas + $iva;
-                                    ?>
-                    <tr style="">
-                        <td colspan="2" style="width: 10%; text-align: center; ">{{ number_format($detail->quantity,0)
-                            }}</td>
-                        <td style="width: 50%; text-align: left;">{{ $detail->product->name }}</td>
-                        <td colspan="2" style="width: 10%; text-align: right; ">${{ number_format($detail->price, 2) }}
-                        </td>
-                        <td colspan="2" style="width: 10%; text-align: right; ">
-                            $0</td>
-                        <td colspan="2" style="width: 10%; text-align: right; ">${{$ventaExenta}}</td>
-                    </tr>
-                    @endforeach
-                    <tr>
-                        <td colspan="3" rowspan="1" style="padding:10px">{{$numeroAletras}}</td>
-                        <td colspan="2" style="text-align: right;">Sumas:</td>
-                        <td colspan="2" style="text-align: right;"></td>
-                        <td colspan="2" style="text-align: right;">${{$sumas}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" rowspan="1"
-                            style="text-align: center; color: #f2f2f2; background:#222;padding:6px">VENTA MAYORES A
-                            $400.00 RELLENAR INFORMACIÓN</td>
-                        <td colspan="2" style="text-align: right;background:#f2f2f2">IVA:</td>
-                        <td colspan="2" style="text-align: right;"></td>
-                        <td colspan="2" style="text-align: right;">${{$iva}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" rowspan="1">Entregado:</td>
-                        <td colspan="2" style="text-align: right; background:#f2f2f2">Subtotal:</td>
-                        <td colspan="2" style="text-align: right;"></td>
-                        <td colspan="2" style="text-align: right;">${{$subtotal}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" rowspan="1">Firma</td>
-                        <td colspan="2" style="text-align: right; background:#f2f2f2">Ventas exentas:</td>
-                        <td colspan="2" style="text-align: right;"></td>
-                        <td colspan="2" style="text-align: right;"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" rowspan="1">DUI:</td>
-                        <td colspan="2" style="text-align: right; background:#f2f2f2">Venta Total:</td>
-                        <td colspan="2" style="text-align: right;"></td>
-                        <td colspan="2" style="text-align: right;">${{$subtotal}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p style="text-align: right;">Original Cliente</p>
-        </div>
+                                <div style="margin-top: 5px;">N.R.C.:</div>
+                                <div style="margin-top: 5px;">NIT:</div>
+                                <div style="margin-top: 5px; display: flex; justify-content: flex-end;">
+                                    <div class="horizontal-text">20ST000F1</div>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </table>
+                </td>
+            </tr>
+            <tr class="information">
+                <td colspan="6" style="border:none;">
+                    <table>
+                        <tr>
+                            <td style="border:none;">
+                                <table>
+                                    <tr>
+                                        <td>Día:</td>
+                                        <td><span>
+                                                {{date('d')}}</span>
+                                        </td>
+                                        <td>Mes:</td>
+                                        <td><span>{{date('m')}}
+                                            </span></td>
+                                        <td>Año:</td>
+                                        <td><span>
+                                                {{date('Y')}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nombre:</td>
+                                        <td colspan="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D.U.I. ó N.I.T.:</td>
+                                        <td colspan="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dirección:</td>
+                                        <td colspan="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Venta a cuenta de:</td>
+                                        <td colspan="5">{{ Auth::user()->name }}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <?php $sumas = 0; $servicioTotal = 0; ?>
+            @foreach ($saleDetails as $detail)
+            <?php
+            $ventaExenta = $detail->quantity * $detail->price;
+                        $servicioProducto = $detail->quantity * $detail->product->servicio;
+                        $sumas += $ventaExenta;
+                        $servicioTotal += $servicioProducto;
+                        $iva = $detail->sale->iva;
+                        $subtotal = $sumas + $iva + $servicioTotal;
+            ?>
+            <tr class="heading">
+                <th class="center-text">CANT.</th>
+                <th class="center-text description">ARTICULO(DESCRIPCION)</th>
+                <th class="center-text">PRECIO UNITARIO</th>
+                <th class="center-text">VENTAS NO SUJ.</th>
+                <th class="center-text">VENTAS EXENTAS</th>
+                <th class="center-text">VENTAS GRAVADAS</th>
+            </tr>
+            <!-- Agrega aquí las filas de items según sea necesario -->
+            <tr class="item">
+                <td class="center-text">{{ number_format($detail->quantity,0)
+                    }}</td>
+                <td class="description">
+                    {{ $detail->product->name }}
+                </td>
+                <td class="right-text">${{ number_format($detail->price, 2) }}
+                </td>
+                <td class="right-text">$0.00</td>
+                <td class="right-text">${{number_format($ventaExenta, 2)}}</td>
+                <td class="right-text">${{ number_format($ventaExenta, 2) }}</td>
+            </tr>
+            <!-- Agrega más filas aquí -->
+            <!-- Añadimos más filas para simular 15 líneas -->
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description">
+                    <p>
+                        ¿Servicio profesional?:{{ $detail->product->servico_obra }}
+                    </p>
+                </td>
+                <td class="right-text">
+                    <p>
+                        Total: ${{ number_format($servicioProducto, 2) }}
+                    </p>
+                </td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            <tr class="item">
+                <td class="center-text"></td>
+                <td class="description"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+                <td class="right-text"></td>
+            </tr>
+            @endforeach
+        </table>
+        <table>
+            <tr>
+                <td rowspan="5" class="bordered" style="width: 50%;">
+                    <strong>SON:</strong> {{$numeroAletras}}.<br><br>
+                    <strong>C/C:</strong> _______________________________<br><br>
+                    <strong>LLENAR SI LA OPERACIÓN ES IGUAL O SUPERIOR A $200.00</strong><br><br>
+                    <strong>Entregado por:</strong>SOLUMAQ S.A DE C.V<br>
+                    <strong>Nombre:</strong> {{ Auth::user()->name }}<br>
+                    <strong>DUI:</strong> _______________________________<br>
+                    <strong>Firma:</strong> _______________________________<br><br>
+                    <strong>Recibido por:</strong> SOLUMAQ S.A DE C.V<br>
+                    <strong>Nombre:</strong> {{ $clients->name }}<br>
+                    <strong>DUI o NIT:</strong> {{ $clients->nit }}<br>
+                    <strong>Firma:</strong> _______________________________
+                </td>
+                <td class="right-text bordered">SUMAS</td>
+                <td class="right-text bordered">${{number_format($sumas, 2)}}</td>
+            </tr>
+            <tr>
+                <td class="right-text bordered">VENTA EXENTA</td>
+                <td class="right-text bordered">${{number_format($ventaExenta, 2)}}</td>
+            </tr>
+            <tr>
+                <td class="right-text bordered">VENTA NO SUJETA</td>
+                <td class="right-text bordered">$0.00</td>
+            </tr>
+            <tr>
+                <td class="right-text bordered">(-) IVA RETENIDO</td>
+                <td class="right-text bordered">${{number_format($iva,2)}}<< /td>
+            </tr>
+            <tr>
+                <td class="right-text bordered"><strong>VENTA TOTAL</strong></td>
+                <td class="right-text bordered"><strong>${{number_format($subtotal + $detail->product->servicio,
+                        2)}}</strong></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td class="bordered">Hecho por: SOLUMAQ S.A DE C.V</td>
+                <td class="bordered">Revisado por: {{ Auth::user()->name }}</td>
+                <td class="bordered">Autorizado por: SOLUMAQ S.A DE C.V</td>
+            </tr>
+        </table>
     </div>
 </body>
-
 </html>

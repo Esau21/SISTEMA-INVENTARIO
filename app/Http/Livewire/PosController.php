@@ -282,23 +282,23 @@ class PosController extends Component
         $saleDetails = SaleDetails::where('sale_id', $saleId)->get();
 
         $iva = 0.13;
+        $servicioTotal = $sale->servicio; // Obtén el total del servicio de la venta
 
         $ivaCalcular = $this->Iva($sale->total * $iva);
+        $TotalconIva = $sale->total + $ivaCalcular + $servicioTotal;
 
-        $TotalconIva = $sale->total + $ivaCalcular;
-        //Totales
+        // Totales
         $sumas = 0;
         foreach ($saleDetails as $detail) {
             $ventaExenta = $detail->quantity * $detail->price;
             $sumas += $ventaExenta;
             $iva = $detail->sale->iva;
-            $subtotal = $sumas + $iva;
+            $subtotal = $sumas + $iva + $servicioTotal;
         }
+
         $formatter = new NumeroALetras();
         $numeroAletras = $formatter->toMoney(number_format($subtotal, 2, '.', ''), 2, 'DÓLARES', 'CENTAVOS');
 
-        //$pdf = PDF::loadView('pdf.ventas_unique', compact('sale', 'saleDetails', 'iva', 'TotalconIva'));
-        //Validacion de Tipo de documento a emitir
         if ($type_docs == 'ccf') {
             $pdf = PDF::loadView('pdf.ccf', compact('sale', 'saleDetails', 'iva', 'TotalconIva', 'numeroAletras', 'clients'));
             return $pdf->stream('ccf.pdf');

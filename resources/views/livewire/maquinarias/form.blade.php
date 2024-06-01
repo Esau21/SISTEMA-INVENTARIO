@@ -12,53 +12,11 @@
                         <div class="form-group">
                             <label>Nombre</label>
                             <select name="name" id="name" wire:model.lazy='name' class="form-control">
-                                <option value="Excavadora">Excavadora</option>
-                                <option value="Cargadora frontal">Cargadora frontal</option>
-                                <option value="Dumper">Dumper</option>
-                                <option value="Bulldozer">Bulldozer</option>
-                                <option value="Motoniveladora">Motoniveladora</option>
-                                <option value="Compactadora">Compactadora</option>
-                                <option value="Grúa">Grúa</option>
-                                <option value="Retroexcavadora">Retroexcavadora</option>
-                                <option value="Tractor de orugas">Tractor de orugas</option>
-                                <option value="Camión volquete">Camión volquete</option>
-                                <option value="Tractor de ruedas">Tractor de ruedas</option>
-                                <option value="Minicargadora">Minicargadora</option>
-                                <option value="Rodillo compactador">Rodillo compactador</option>
-                                <option value="Perforadora">Perforadora</option>
-                                <option value="Apisonadora">Apisonadora</option>
-                                <option value="Tractor de cadenas">Tractor de cadenas</option>
-                                <option value="Tractor agrícola">Tractor agrícola</option>
-                                <option value="Tractor de llantas">Tractor de llantas</option>
-                                <option value="Tractor articulado">Tractor articulado</option>
-                                <option value="Pala cargadora">Pala cargadora</option>
-                                <option value="Motocicleta de nieve">Motocicleta de nieve</option>
-                                <option value="Grúa torre">Grúa torre</option>
-                                <option value="Grúa móvil">Grúa móvil</option>
-                                <option value="Grúa telescópica">Grúa telescópica</option>
-                                <option value="Grúa sobre orugas">Grúa sobre orugas</option>
-                                <option value="Grúa articulada">Grúa articulada</option>
-                                <option value="Excavadora de cadenas">Excavadora de cadenas</option>
-                                <option value="Excavadora de ruedas">Excavadora de ruedas</option>
-                                <option value="Retroexcavadora mixta">Retroexcavadora mixta</option>
-                                <option value="Dumper rígido">Dumper rígido</option>
-                                <option value="Dumper articulado">Dumper articulado</option>
-                                <option value="Dumper de orugas">Dumper de orugas</option>
-                                <option value="Dumper de camión">Dumper de camión</option>
-                                <option value="Compactador de suelos">Compactador de suelos</option>
-                                <option value="Compactador de asfalto">Compactador de asfalto</option>
-                                <option value="Compactador de residuos">Compactador de residuos</option>
-                                <option value="Compactador de basura">Compactador de basura</option>
-                                <option value="Compactador de tierra">Compactador de tierra</option>
-                                <option value="Camión mezclador de concreto">Camión mezclador de concreto</option>
-                                <option value="Camión bomba de concreto">Camión bomba de concreto</option>
-                                <option value="Camión de plataforma">Camión de plataforma</option>
-                                <option value="Camión con grúa">Camión con grúa</option>
-                                <option value="Camión grúa autocargante">Camión grúa autocargante</option>
-                                <option value="Camión portacontenedores">Camión portacontenedores</option>
-                                <option value="Camión tolva">Camión tolva</option>
-                                <option value="Camión barredora">Camión barredora</option>
-                                <option value="Camión volquete articulado">Camión volquete articulado</option>
+                                <option value="Elegir">Elegir</option>
+                                <option value="Retroexcavadora CAT 416 F2">Retroexcavadora CAT 416 F2</option>
+                                <option value="Mini bobcat Caterpillar 246 D3">Mini bobcat Caterpillar 246 D3</option>
+                                <option value="Excavadora Caterpillar 375">Excavadora Caterpillar 375</option>
+                                <option value="Excavadora Caterpillar 320">Excavadora Caterpillar 320</option>
                             </select>
 
                         </div>

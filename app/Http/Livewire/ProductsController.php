@@ -9,14 +9,14 @@ use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 
-
 class ProductsController extends Component
 {
 
     use WithPagination;
     use WithFileUploads;
 
-    public $name,$barcode,$cost,$price,$stock,$alerts,$categoryid,$search,$image,$selected_id,$pageTitle,$componentName;
+    public $name,$barcode,$cost,$price,$stock,$alerts,$categoryid,$search,$image,
+    $selected_id,$pageTitle,$componentName, $descripcion, $servico_obra, $servicio;
     private $pagination = 5;
 
     public function paginationView()
@@ -66,7 +66,8 @@ class ProductsController extends Component
             'price' => 'required',
             'stock' => 'required',
             'alerts' => 'required',
-            'categoryid' => 'required|not_in:Elegir'
+            'categoryid' => 'required|not_in:Elegir',
+            'descripcion' => 'required',
         ];
 
         $messages =[
@@ -79,6 +80,7 @@ class ProductsController extends Component
             'stock.required' => 'El stock es requerido',
             'alerts.required' => 'Ingresa el valor minimo en existencias',
             'categoryid.not_in' => 'Elige una categoria',
+            'descripcion' => 'La descripcion es un campo requerido'
         ];
 
         $this->validate($rules, $messages);
@@ -86,6 +88,9 @@ class ProductsController extends Component
 
         $product = Product::create([
             'name' => $this->name,
+            'descripcion' => $this->descripcion,
+            'servico_obra' => $this->servico_obra,
+            'servicio' => $this->servicio,
             'cost' => $this->cost,
             'price' => $this->price,
             'barcode' => $this->barcode,
@@ -113,6 +118,9 @@ class ProductsController extends Component
     {
         $this->selected_id = $product->id;
         $this->name = $product->name;
+        $this->descripcion = $product->descripcion;
+        $this->servico_obra = $product->servico_obra;
+        $this->servicio = $product->servicio;
         $this->barcode = $product->barcode;
         $this->cost = $product->cost;
         $this->price = $product->price;
@@ -128,13 +136,14 @@ class ProductsController extends Component
     public function Update()
     {
         $rules =[
-            'name' => "required|min:3|unique:products,name,{$this->selected_id}",
+            'name' => 'required|unique:products|min:3',
             'barcode' => 'required',
             'cost' => 'required',
             'price' => 'required',
             'stock' => 'required',
             'alerts' => 'required',
-            'categoryid' => 'required|not_in:Elegir'
+            'categoryid' => 'required|not_in:Elegir',
+            'descripcion' => 'required',
         ];
 
         $messages =[
@@ -147,6 +156,7 @@ class ProductsController extends Component
             'stock.required' => 'El stock es requerido',
             'alerts.required' => 'Ingresa el valor minimo en existencias',
             'categoryid.not_in' => 'Elige una categoria',
+            'descripcion' => 'La descripcion es un campo requerido'
         ];
 
         $this->validate($rules, $messages);
@@ -156,13 +166,15 @@ class ProductsController extends Component
 
         $product->update([
             'name' => $this->name,
+            'descripcion' => $this->descripcion,
+            'servico_obra' => $this->servico_obra,
+            'servicio' => $this->servicio,
             'cost' => $this->cost,
             'price' => $this->price,
             'barcode' => $this->barcode,
             'stock' => $this->stock,
             'alerts' => $this->alerts,
             'category_id' => $this->categoryid
-            
         ]);
 
      
@@ -193,6 +205,9 @@ class ProductsController extends Component
     public function resetUI()
     {
         $this->name ='';
+        $this->descripcion = '';
+        $this->servico_obra = '';
+        $this->servicio = '';
         $this->barcode ='';
         $this->cost ='';
         $this->price ='';

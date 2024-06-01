@@ -23,7 +23,10 @@
                     <table class="table table-bordered table striped mt-1">
                         <thead class="text-white text-center" style="background: #3B3F5C">
                             <tr>
+                                <th class="table-th text-white text-left">NOMBRE</th>
                                 <th class="table-th text-white text-left">DESCRIPCION</th>
+                                <th class="table-th text-white text-left">¿SERVICIO PROFESIONA?</th>
+                                <th class="table-th text-white text-left">SERVICIO</th>
                                 <th class="table-th text-white text-center">BARCODE</th>
                                 <th class="table-th text-white text-center">CATEGORIA</th>
                                 <th class="table-th text-white text-center">PRECIO</th>
@@ -38,6 +41,19 @@
                             <tr>
                                 <td>
                                     <h6 class="text-left">{{ $product->name }}</h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-left">{{ $product->descripcion }}</h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-left">
+                                        <span class="badge bg-success {{ $product->servico_obra === 'SI' ? 'bg-success' : 'bg-danger' }}">
+                                            {{ $product->servico_obra }}
+                                        </span>
+                                    </h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-left">{{ $product->servicio }}</h6>
                                 </td>
                                 <td>
                                     <h6 class="text-center">{{ $product->barcode }}</h6>
