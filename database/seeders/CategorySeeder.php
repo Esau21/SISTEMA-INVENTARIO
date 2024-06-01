@@ -14,22 +14,27 @@ class CategorySeeder extends Seeder
     public function run()
     {
         Category::create([
-            'name' => 'COMPRESORES',
+            'name' => 'MAQUINARIA PESADA',
             'image' => 'https://dummyimage.com/600x400/000/fff'
         ]);
 
         Category::create([
-            'name' => 'ELEVADORES',
+            'name' => 'ACEITES',
             'image' => 'https://dummyimage.com/600x400/000/fff'
         ]);
 
         Category::create([
-            'name' => 'COMPRESORES DE AIRE',
+            'name' => 'EXCABADORAS',
             'image' => 'https://dummyimage.com/600x400/000/fff'
         ]);
 
         Category::create([
-            'name' => 'COMPUTADORAS DE VEHICULOS',
+            'name' => 'MINI CARGADOR',
+            'image' => 'https://dummyimage.com/600x400/000/fff'
+        ]);
+
+        Category::create([
+            'name' => 'MINI BOBCAT',
             'image' => 'https://dummyimage.com/600x400/000/fff'
         ]);
     }

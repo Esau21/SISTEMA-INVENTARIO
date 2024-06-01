@@ -9,63 +9,11 @@
             <div class="form-group">
                 <div class="col-sm-12 mb-3">
                     <select id="nombrepro" name="nombrepro" wire:model.lazy='nombrepro' class="form-control">
-                        <option value="Llantas para excavadoras">Llantas para excavadoras</option>
-                        <option value="Llantas para tractores de orugas">Llantas para tractores de orugas</option>
-                        <option value="Llantas para tractores de ruedas">Llantas para tractores de ruedas</option>
-                        <option value="Llantas industriales">Llantas industriales</option>
-                        <option value="Llantas de alta resistencia">Llantas de alta resistencia</option>
-                        <option value="Llantas para terrenos difíciles">Llantas para terrenos difíciles</option>
-                        <option value="Llantas antipinchazos">Llantas antipinchazos</option>
-                        <option value="Llantas con sistema de autolimpieza">Llantas con sistema de autolimpieza</option>
-                        <option value="Servicio de montaje de llantas">Servicio de montaje de llantas</option>
-                        <option value="Servicio de equilibrado de llantas">Servicio de equilibrado de llantas</option>
-                        <option value="Reparación de llantas">Reparación de llantas</option>
-                        <option value="Recubrimiento de llantas">Recubrimiento de llantas</option>
-                        <option value="Venta de llantas usadas">Venta de llantas usadas</option>
-                        <option value="Venta de llantas de segunda mano">Venta de llantas de segunda mano</option>
-                        <option value="Venta de neumáticos para tractores">Venta de neumáticos para tractores</option>
-                        <option value="Venta de neumáticos para excavadoras">Venta de neumáticos para excavadoras
-                        </option>
-                        <option value="Venta de cámaras para llantas">Venta de cámaras para llantas</option>
-                        <option value="Venta de rines para llantas">Venta de rines para llantas</option>
-                        <option value="Venta de herramientas para montaje de llantas">Venta de herramientas para montaje
-                            de llantas</option>
-                        <option value="Venta de sistemas de control de presión de llantas">Venta de sistemas de control
-                            de presión de llantas</option>
-                        <option value="Venta de repuestos para llantas">Venta de repuestos para llantas</option>
-                        <option value="Asesoramiento en selección de llantas">Asesoramiento en selección de llantas
-                        </option>
-                        <option value="Asesoramiento en mantenimiento de llantas">Asesoramiento en mantenimiento de
-                            llantas</option>
-                        <option value="Asesoramiento en seguridad para llantas">Asesoramiento en seguridad para llantas
-                        </option>
-                        <option value="Formación y capacitación en montaje de llantas">Formación y capacitación en
-                            montaje de llantas</option>
-                        <option value="Formación y capacitación en mantenimiento de llantas">Formación y capacitación en
-                            mantenimiento de llantas</option>
-                        <option value="Formación y capacitación en seguridad para llantas">Formación y capacitación en
-                            seguridad para llantas</option>
-                        <option value="Análisis de desgaste de llantas">Análisis de desgaste de llantas</option>
-                        <option value="Inspección de llantas">Inspección de llantas</option>
-                        <option value="Diagnóstico de problemas de llantas">Diagnóstico de problemas de llantas</option>
-                        <option value="Gestión de flotas de llantas">Gestión de flotas de llantas</option>
-                        <option value="Planificación de reemplazo de llantas">Planificación de reemplazo de llantas
-                        </option>
-                        <option value="Monitoreo remoto de llantas">Monitoreo remoto de llantas</option>
-                        <option value="Programas de mantenimiento preventivo para llantas">Programas de mantenimiento
-                            preventivo para llantas</option>
-                        <option value="Programas de mantenimiento predictivo para llantas">Programas de mantenimiento
-                            predictivo para llantas</option>
-                        <option value="Gestión de inventario de llantas">Gestión de inventario de llantas</option>
-                        <option value="Análisis de costos de llantas">Análisis de costos de llantas</option>
-                        <option value="Optimización de la vida útil de las llantas">Optimización de la vida útil de las
-                            llantas</option>
-                        <option value="Asesoramiento en retiro de llantas">Asesoramiento en retiro de llantas</option>
-                        <option value="Reciclaje de llantas">Reciclaje de llantas</option>
-                        <option value="Disposición de llantas usadas">Disposición de llantas usadas</option>
-                        <option value="Transporte de llantas">Transporte de llantas</option>
-                        <option value="Seguro para llantas">Seguro para llantas</option>
-                        <option value="Financiamiento para llantas">Financiamiento para llantas</option>
+                        <option value="Elegir">Elegir</option>
+                        <option value="Llantas minibobcat 10 lonas">Llantas minibobcat 10 lonas</option>
+                        <option value="Llantas minibobcat 12 lonas">Llantas minibobcat 12 lonas</option>
+                        <option value="Llanta para tractor R1/R1W">Llanta para tractor R1/R1W</option>
+                        <option value="llanta industrial (R4)">llanta industrial (R4)</option>
                     </select>
 
                 </div>
@@ -77,7 +25,7 @@
                         rows="10"></textarea>
                 </div>
                 <div class="col-sm-6 mb-3">
-                    <label>¿Mano de obra?</label>
+                    <label>¿Servicios profesionales?</label>
                     <select class="form-control" name="manoobra" wire:model.lazy='manoobra' id="manoobra">
                         <option value="">ELEGIR</option>
                         <option value="SI">SI</option>
@@ -86,13 +34,20 @@
                 </div>
                 <div class="col-sm-6 mb-3">
                     <label>Precio del producto</label>
-                    <input type="number" wire:model.lazy='price' class="form-control"
-                        placeholder="Ingresa el precio del producto">
+                        <select name="price" id="price" wire:model.lazy='price' class="form-control">
+                            <option value="Elegir">Elegir</option>
+                            <option value="525">525</option>
+                            <option value="525">580</option>
+                            <option value="600">600</option>
+                            <option value="623">623</option>
+                        </select>
                 </div>
                 <div class="col-sm-6 mb-3">
-                    <label>Total mano obra</label>
-                    <input type="number" wire:model.lazy='total_manoobra' class="form-control"
-                        placeholder="Total mano de obra">
+                    <label>Servicios profesionales</label>
+                    <select name="total_manoobra" id="total_manoobra" wire:model.lazy='total_manoobra' class="form-control">
+                        <option value="Elegir">Elegir</option>
+                        <option value="35">35</option>
+                    </select>
                 </div>
                 <div class="col-sm-6 mb-3">
                     <label>Iva(0.13%)</label>

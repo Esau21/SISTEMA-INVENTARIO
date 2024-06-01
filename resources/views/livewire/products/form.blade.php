@@ -3,11 +3,50 @@
 
 <div class="row">
     {{-- Esto es el input para el nombre --}}
-    <div class="col-sm-12 col-md-8">
+
+    <div class="col-sm-12 col-md-12">
         <div class="form-group">
             <label>Nombre</label>
             <input type="text" wire:model.lazy="name" class="form-control" placeholder="ej:Cursos" >
             @error('name')
+                <span class="text-danger er">{{ $message}}</span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-8">
+        <div class="form-group">
+            <label>Descripcion</label>
+            <textarea type="text" wire:model.lazy="descripcion" class="form-control" placeholder="ej:Cursos" ></textarea>
+            @error('descripcion')
+                <span class="text-danger er">{{ $message}}</span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-4">
+        <div class="form-group">
+            <label>¿SERVICIOS PROFESIONALES?</label>
+            <select name="servico_obra" id="servico_obra" wire:model.lazy='servico_obra' class="form-control">
+                <option value="Elegir">Elegir</option>
+                <option value="SI">SI</option>
+                <option value="NO">NO</option>
+            </select>
+            @error('price')
+                <span class="text-danger er">{{ $message}}</span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-4">
+        <div class="form-group">
+            <label>SERVICIOS</label>
+            <select name="servicio" id="servicio" wire:model.lazy='servicio' class="form-control">
+                <option value="Elegir">Elegir</option>
+                <option value="35">35</option>
+                <option value="0">0</option>
+            </select>
+            @error('price')
                 <span class="text-danger er">{{ $message}}</span>
             @enderror
         </div>

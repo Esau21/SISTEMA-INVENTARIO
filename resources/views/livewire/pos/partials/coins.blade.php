@@ -41,11 +41,6 @@
                                     <input type="radio" style="height:1.8rem" class="form-control"
                                         wire:model="tipo_docs" value="factura">
                                 </div>
-                                <div class="col-sm-12 col-md-6">
-                                    <label class="text-center" for="">Cotizacion</label>
-                                    <input type="radio" style="height:1.8rem" class="form-control"
-                                        wire:model="tipo_docs" value="cotizacion">
-                                </div>
                             </div>
                         </div>
                         <div class="input-group input-group-md mb-3">
