@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Factura</title>
+    <title>CCF</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -23,6 +23,8 @@
             position: relative;
             box-sizing: border-box;
         }
+
+
 
         .invoice-box img.logo {
             width: 150px;
@@ -141,7 +143,7 @@
                                 <img src="{{ asset('img/ol.png') }}" class="logo">
                             </td>
                             <td style="border:none; text-align:center;">
-                                <div class="top-title">SOLUMAQ S.A DE C.V</div>
+                                <div class="top-title">SOLUMAQ S.A DE C.V.</div>
                                 <div class="sub-title">CARRETERA A LOS PLANES DE RENDEROS, KM 3 INTERPRETACION AUTOPISTA
                                     COMALAPA SAN SALVADOR, EL SALVADOR.</div>
                                 <div class="sub-title">Teléfono: 7541-3365</div>
@@ -149,7 +151,7 @@
                             </td>
                             <td class="top-right" style="border: 1px solid #000;">
                                 <div class="top-title" style="font-size: 18px; font-weight: bold; text-align: center;">
-                                    FACTURA</div>
+                                    CREDITO FISCAL</div>
                                 <div style="margin-top: 5px; text-align: left;">
                                     N°. <span class="" style="padding: 3px;">
                                         {{$detail->id}}
@@ -257,7 +259,7 @@
                 </td>
                 <td class="right-text"></td>
                 <td class="right-text"></td>
-                <td class="right-text"></td>
+                <td class="right-text">${{number_format($servicioProducto, 2) }}</td>
             </tr>
             <tr class="item">
                 <td class="center-text"></td>
@@ -400,7 +402,7 @@
                 <td class="right-text bordered">$0.00</td>
             </tr>
             <tr>
-                <td class="right-text bordered">(-) IVA RETENIDO</td>
+                <td class="right-text bordered">(+) IVA</td>
                 <td class="right-text bordered">${{number_format($iva,2)}}<< /td>
             </tr>
             <tr>

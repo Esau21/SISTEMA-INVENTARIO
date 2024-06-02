@@ -207,7 +207,7 @@
         </table>
         <table>
             <tr class="heading">
-                <th class="center-text">#</th>
+                <th class="center-text">ID</th>
                 <th class="center-text description">ARTICULO(DESCRIPCION)</th>
                 <th class="center-text">PRECIO UNITARIO</th>
                 <th class="center-text">VENTAS NO SUJ.</th>
@@ -384,7 +384,7 @@
             </tr>
             <tr>
                 <td class="right-text bordered"><strong>VENTA TOTAL</strong></td>
-                <td class="right-text bordered"><strong>${{ number_format($cotizacion->total + $cotizacion->total_manoobra, 2) }}</strong></td>
+                <td class="right-text bordered"><strong>${{ number_format($cotizacion->total, 2) }}</strong></td>
             </tr>
         </table>
         <table>

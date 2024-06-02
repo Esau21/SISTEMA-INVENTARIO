@@ -257,7 +257,7 @@
                 </td>
                 <td class="right-text"></td>
                 <td class="right-text"></td>
-                <td class="right-text"></td>
+                <td class="right-text">${{number_format($servicioProducto, 2) }}</td>
             </tr>
             <tr class="item">
                 <td class="center-text"></td>
@@ -400,8 +400,8 @@
                 <td class="right-text bordered">$0.00</td>
             </tr>
             <tr>
-                <td class="right-text bordered">(-) IVA RETENIDO</td>
-                <td class="right-text bordered">${{number_format($iva,2)}}<< /td>
+                <td class="right-text bordered">(+) IVA</td>
+                <td class="right-text bordered">$0.00<< /td>
             </tr>
             <tr>
                 <td class="right-text bordered"><strong>VENTA TOTAL</strong></td>
