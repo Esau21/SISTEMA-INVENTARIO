@@ -207,7 +207,7 @@
         </table>
         <table>
             <tr class="heading">
-                <th class="center-text">#</th>
+                <th class="center-text">ID</th>
                 <th class="center-text description">ARTICULO(DESCRIPCION)</th>
                 <th class="center-text">PRECIO UNITARIO</th>
                 <th class="center-text">VENTAS NO SUJ.</th>

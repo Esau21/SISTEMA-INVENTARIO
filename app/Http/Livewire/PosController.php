@@ -261,7 +261,7 @@ class PosController extends Component
             $this->change = 0;
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
-            $this->emit('sale-ok', 'VENTA REGISTRADA CON EXITO, REVISA TU TICKET DE VENTA');
+            $this->emit('sale-ok', 'VENTA REGISTRADA CON EXITO, REVISA TU FACTURA DE VENTA.');
             $this->emit('print-ticket', $sale->id);
             $this->emit('reload-page');
         } catch (Exception $e) {

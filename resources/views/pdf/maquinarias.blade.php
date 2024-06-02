@@ -140,7 +140,7 @@
                                 <img src="{{ asset('img/ol.png') }}" class="logo">
                             </td>
                             <td style="border:none; text-align:center;">
-                                <div class="top-title">SOLUMAQ S.A DE C.V</div>
+                                <div class="top-title">SOLUMAQ S.A DE C.V.</div>
                                 <div class="sub-title">CARRETERA A LOS PLANES DE RENDEROS, KM 3 INTERPRETACION AUTOPISTA
                                     COMALAPA SAN SALVADOR, EL SALVADOR.</div>
                                 <div class="sub-title">Teléfono: 7541-3365</div>
