@@ -32,14 +32,17 @@ class ExportController extends Controller
 
         if ($userId == 0) {
             $data = Sale::join('users as u', 'u.id', 'sales.user_id')
-                ->select('sales.*', 'u.name as user')
+                ->join('sale_details as sd', 'sd.sale_id', 'sales.id')
+                ->join('products as p', 'p.id', 'sd.product_id')
+                ->select('sales.*', 'u.name as user', 'p.name as productname')
                 ->whereBetween('sales.created_at', [$from, $to])
                 ->get();
         } else {
             $data = Sale::join('users as u', 'u.id', 'sales.user_id')
-                ->select('sales.*', 'u.name as user')
+                ->join('sale_details as sd', 'sd.sale_id', 'sales.id')
+                ->join('products as p', 'p.id', 'sd.product_id')
+                ->select('sales.*', 'u.name as user', 'p.name as productname')
                 ->whereBetween('sales.created_at', [$from, $to])
-                ->where('user_id', $userId)
                 ->get();
         }
 
