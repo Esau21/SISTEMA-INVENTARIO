@@ -13,7 +13,7 @@
         <table cellpadding="0" cellspacing="0" width="100%" class="table table-striped table">
             <tr>
                 <td align="center" colspan="2" class="text-center">
-                    <span style="font-size: 25px; font-weight: bold">Factura</span>
+                    <span style="font-size: 25px; font-weight: bold">REPORTES DE MAQUINARIAS</span>
                 </td align="center">
             </tr>
             <tr>

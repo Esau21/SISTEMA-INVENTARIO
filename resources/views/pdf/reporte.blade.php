@@ -13,7 +13,7 @@
         <table cellpadding="0" cellspacing="0" width="100%" class="table table-striped table">
             <tr>
                 <td align="center" colspan="2" class="text-center">
-                    <span style="font-size: 25px; font-weight: bold">Factura</span>
+                    <span style="font-size: 25px; font-weight: bold">REPORTES DE VENTAS</span>
                 </td align="center">
             </tr>
             <tr>
@@ -44,6 +44,7 @@
             <thead>
                 <tr>
                     <th width="10%">FOLIO</th>
+                    <th width="10%">PRODUCTO</th>
                     <th width="12%">IMPORTE</th>
                     <th width="10%">ITEMS</th>
                     <th width="12%">STATUS</th>
@@ -55,6 +56,7 @@
                 @foreach($data as $item)
                     <tr>
                         <td align="center">{{$item->id}}</td>
+                        <td align="center">{{$item->productname}}</td>
                         <td align="center">${{number_format($item->total,2)}}</td>
                         <td align="center">{{$item->items}}</td>
                         <td align="center">{{$item->status}}</td>
@@ -70,9 +72,6 @@
                     </td>
                     <td colspan="1" class="text-center">
                         <span><strong>${{number_format($data->sum('total'),2)}}</strong></span>
-                    </td>
-                    <td class="text-center">
-                        <span><strong>${{number_format($data->sum('items'),2)}}</strong></span>
                     </td>
                     <td colspan="3" class="text-center"></td>
                 </tr>

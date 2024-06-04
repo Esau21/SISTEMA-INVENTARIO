@@ -27,7 +27,7 @@
                                 <td class="text-center"><h6>{{$d->id}}</h6></td>
                                 <td class="text-center"><h6>{{$d->product}}</h6></td>
                                 <td class="text-center"><h6>${{number_format($d->price,2)}}</h6></td>
-                                <td class="text-center"><h6>${{number_format($d->quantity,0)}}</h6></td>
+                                <td class="text-center"><h6>{{number_format($d->quantity,0)}}</h6></td>
                                 <td class="text-center"><h6>${{number_format($d->price * $d->quantity,2)}}</h6></td>
                             </tr>
                         @endforeach
