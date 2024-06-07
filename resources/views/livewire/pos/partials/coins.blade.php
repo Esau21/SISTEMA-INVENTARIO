@@ -71,8 +71,8 @@
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-6">
                                 @if ($efectivo >= $total && $total > 0)
-                                <button wire:click.prevent="saveSale" class="btn btn-dark btn-md btn-block">
-                                    GUARDAR F9
+                                <button wire:click.prevent="saveSale" class="btn btn-outline-success btn-md btn-block">
+                                    GUARDAR VENTA
                                 </button>
                                 @endif
                             </div>

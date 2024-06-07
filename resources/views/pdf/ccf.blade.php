@@ -158,8 +158,8 @@
                                     </span>
                                 </div>
 
-                                <div style="margin-top: 5px;">N.R.C.:</div>
-                                <div style="margin-top: 5px;">NIT:</div>
+                                <div style="margin-top: 5px;">N.R.C.:{{$clients->nrc}}</div>
+                                <div style="margin-top: 5px;">NIT:{{$clients->nit}}</div>
                                 <div style="margin-top: 5px; display: flex; justify-content: flex-end;">
                                     <div class="horizontal-text">20ST000F1</div>
                                 </div>
