@@ -156,8 +156,8 @@
                                     </span>
                                 </div>
 
-                                <div style="margin-top: 5px;">N.R.C.:</div>
-                                <div style="margin-top: 5px;">NIT:</div>
+                                <div style="margin-top: 5px;">N.R.C.:{{$clients->nrc}}</div>
+                                <div style="margin-top: 5px;">NIT:{{$clients->nit}}</div>
                                 <div style="margin-top: 5px; display: flex; justify-content: flex-end;">
                                     <div class="horizontal-text">20ST000F1</div>
                                 </div>
@@ -188,15 +188,15 @@
                                     </tr>
                                     <tr>
                                         <td>Nombre:</td>
-                                        <td colspan="5"></td>
+                                        <td colspan="5">{{$clients->name}}</td>
                                     </tr>
                                     <tr>
                                         <td>D.U.I. ó N.I.T.:</td>
-                                        <td colspan="5"></td>
+                                        <td colspan="5">{{ $clients->nit }}</td>
                                     </tr>
                                     <tr>
                                         <td>Dirección:</td>
-                                        <td colspan="5"></td>
+                                        <td colspan="5">{{$clients->direccion}}</td>
                                     </tr>
                                     <tr>
                                         <td>Venta a cuenta de:</td>

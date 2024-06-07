@@ -27,6 +27,8 @@
                                 <th class="table-th text-center text-white">NOMBRE</th>
                                 <th class="table-th text-center text-white">DIRECCION</th>
                                 <th class="table-th text-center text-white">NIT</th>
+                                <th class="table-th text-center text-white">NRC</th>
+                                <th class="table-th text-center text-white">GIRO</th>
                                 <th class="table-th text-center text-white">TELEFONO</th>
                                 <th class="table-th text-center text-white">OPCIONES</th>
                             </tr>
@@ -34,19 +36,25 @@
                         <tbody>
                             @foreach ($clientes as $c)
                                 <tr>
-                                    <td>
+                                    <td class="text-center">
                                         <h6>{{ $c->id }}</h6>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <h6>{{ $c->name }}</h6>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <h6>{{ $c->direccion }}</h6>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <h6>{{ $c->nit }}</h6>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
+                                        <h6>{{ $c->nrc }}</h6>
+                                    </td>
+                                    <td class="text-center">
+                                        <h6>{{ $c->giro }}</h6>
+                                    </td>
+                                    <td class="text-center">
                                         <h6>{{ $c->telefono }}</h6>
                                     </td>
                                     <td class="text-center">
