@@ -144,10 +144,9 @@
                             </td>
                             <td style="border:none; text-align:center;">
                                 <div class="top-title">SOLUMAQ S.A DE C.V.</div>
-                                <div class="sub-title">CARRETERA A LOS PLANES DE RENDEROS, KM 3 INTERPRETACION AUTOPISTA
-                                    COMALAPA SAN SALVADOR, EL SALVADOR.</div>
-                                <div class="sub-title">Teléfono: 7541-3365</div>
-                                <div class="sub-title">Correo: progresamasuls@gmail.com</div>
+                                <div class="sub-title">AV. MANUAL ENRIQUE ARAUJO 5-5 SAN SALVADOR, EL SALVADOR.</div>
+                                <div class="sub-title">Teléfono: 2555-5555</div>
+                                <div class="sub-title">Correo: solumaq@gmail.com</div>
                             </td>
                             <td class="top-right" style="border: 1px solid #000;">
                                 <div class="top-title" style="font-size: 18px; font-weight: bold; text-align: center;">
@@ -420,4 +419,5 @@
         </table>
     </div>
 </body>
+
 </html>
